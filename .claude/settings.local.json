@@ -5,7 +5,9 @@
       "Bash(npm --version)",
       "Bash(yo @microsoft/sharepoint:*)",
       "Bash(npm install:*)",
-      "Bash(gulp build:*)"
+      "Bash(gulp build:*)",
+      "Bash(ping:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
