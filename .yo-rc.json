@@ -1,0 +1,18 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "20.19.2",
+    "sdksVersions": {},
+    "version": "1.21.0",
+    "libraryName": "kpfaoperations",
+    "libraryId": "99a472d9-02f3-4ffc-b4cd-5d88ae449092",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "kpfaoperations",
+    "solutionShortDescription": "kpfaoperations description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

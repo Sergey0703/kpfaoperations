@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "kpfaoperations-client-side-solution",
+    "id": "99a472d9-02f3-4ffc-b4cd-5d88ae449092",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.21.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "kpfaoperations description"
+      },
+      "longDescription": {
+        "default": "kpfaoperations description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "kpfaoperations Feature",
+        "description": "The feature that activates elements of the kpfaoperations solution.",
+        "id": "b7b00cb5-fef7-4eba-a03c-a2758e12a9e9",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/kpfaoperations.sppkg"
+  }
+}
