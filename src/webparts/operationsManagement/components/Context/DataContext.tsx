@@ -19,12 +19,13 @@ const DataContext = React.createContext<IDataContext | undefined>(undefined);
 
 export interface IDataProviderProps {
   context: WebPartContext;
+  useMockData?: boolean;
   children: React.ReactNode;
 }
 
 // ========== Provider Component ==========
 
-export const DataProvider: React.FC<IDataProviderProps> = ({ context, children }) => {
+export const DataProvider: React.FC<IDataProviderProps> = ({ context, useMockData = true, children }) => {
   const [state, setState] = React.useState<IDataContextState>(initialState);
   const dataServiceRef = React.useRef<IDataService | undefined>(undefined);
 
@@ -58,8 +59,8 @@ export const DataProvider: React.FC<IDataProviderProps> = ({ context, children }
   React.useEffect(() => {
     const initializeService = async (): Promise<void> => {
       try {
-        Logger.log('Initializing DataContext');
-        const service = ServiceFactory.getService(context);
+        Logger.log('Initializing DataContext', { useMockData });
+        const service = ServiceFactory.getService(context, undefined, useMockData);
         await service.initialize();
         dataServiceRef.current = service;
         Logger.log('DataContext initialized');
@@ -75,7 +76,7 @@ export const DataProvider: React.FC<IDataProviderProps> = ({ context, children }
     initializeService().catch((error) => {
       Logger.error('Initialization failed', error);
     });
-  }, [context]);
+  }, [context, useMockData]);
 
   // Filter buildings when search query or showDeleted changes
   React.useEffect(() => {

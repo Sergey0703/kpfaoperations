@@ -3,10 +3,12 @@
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 import { IDataService } from './IDataService';
 import { SharePointService } from './SharePointService';
+import { MockDataService } from './MockDataService';
 import { Logger } from '../utils/Logger';
 
 export enum ServiceType {
   SharePoint = 'SharePoint',
+  Mock = 'Mock',
   AzureDatabase = 'AzureDatabase'  // Future implementation
 }
 
@@ -17,11 +19,13 @@ export class ServiceFactory {
    * Get or create the data service instance (singleton pattern)
    * @param context - WebPart context
    * @param serviceType - Type of service to create (default: SharePoint)
+   * @param useMockData - If true, use MockDataService regardless of serviceType
    * @returns Data service instance
    */
   public static getService(
     context: WebPartContext,
-    serviceType: ServiceType = ServiceType.SharePoint
+    serviceType: ServiceType = ServiceType.SharePoint,
+    useMockData: boolean = false
   ): IDataService {
     // Return existing instance if already created
     if (this.instance) {
@@ -29,9 +33,20 @@ export class ServiceFactory {
     }
 
     // Create new service based on type
-    Logger.log('Creating data service', { serviceType });
+    Logger.log('Creating data service', { serviceType, useMockData });
+
+    // Override with mock if requested
+    if (useMockData) {
+      this.instance = new MockDataService();
+      Logger.log('Using MockDataService for testing');
+      return this.instance;
+    }
 
     switch (serviceType) {
+      case ServiceType.Mock:
+        this.instance = new MockDataService();
+        break;
+
       case ServiceType.SharePoint:
         this.instance = new SharePointService(context);
         break;

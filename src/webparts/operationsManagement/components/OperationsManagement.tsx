@@ -3,6 +3,8 @@ import { Stack, Pivot, PivotItem } from '@fluentui/react';
 import { IOperationsManagementProps } from './IOperationsManagementProps';
 import { DataProvider } from './Context';
 import { BuildingsGallery } from './BuildingsGallery';
+import { BuildingDetails } from './BuildingDetails';
+import { DialogContainer } from './Dialogs';
 import styles from './OperationsManagement.module.scss';
 
 interface IOperationsManagementState {
@@ -26,8 +28,11 @@ export default class OperationsManagement extends React.Component<IOperationsMan
   public render(): React.ReactElement<IOperationsManagementProps> {
     const { activeTab } = this.state;
 
+    // TODO: Set useMockData=false when SharePoint Lists are created
+    const useMockData = true;
+
     return (
-      <DataProvider context={this.props.context}>
+      <DataProvider context={this.props.context} useMockData={useMockData}>
         <div className={styles.operationsManagement}>
           {/* Pivot Navigation */}
           <Pivot
@@ -56,10 +61,7 @@ export default class OperationsManagement extends React.Component<IOperationsMan
                   <BuildingsGallery />
                 </Stack.Item>
                 <Stack.Item grow className={styles.detailsPanel}>
-                  <div className={styles.placeholder}>
-                    <h2>Select a building</h2>
-                    <p>Choose a building from the list to view details</p>
-                  </div>
+                  <BuildingDetails />
                 </Stack.Item>
               </>
             )}
@@ -85,6 +87,9 @@ export default class OperationsManagement extends React.Component<IOperationsMan
               </div>
             )}
           </Stack>
+
+          {/* Dialogs - Rendered inside DataProvider to access context */}
+          <DialogContainer />
         </div>
       </DataProvider>
     );
