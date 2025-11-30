@@ -42,22 +42,22 @@ export const BuildingDetails: React.FC = () => {
       height: '100%',
       backgroundColor: '#ffffff'
     }}>
-      {/* Building Header with Glassmorphism */}
+      {/* Building Header with Rainbow Underline */}
       <div style={{
         padding: '20px 24px',
-        background: 'rgba(255, 255, 255, 0.95)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        border: '1px solid transparent',
-        backgroundImage: `
-          linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
-          ${ColorScheme.primaryGradientBorder}
-        `,
-        backgroundOrigin: 'border-box',
-        backgroundClip: 'padding-box, border-box',
-        borderRadius: `${ColorScheme.borderRadius} ${ColorScheme.borderRadius} 0 0`,
-        boxShadow: '0 2px 15px rgba(0, 0, 0, 0.08)'
+        background: '#ffffff',
+        position: 'relative',
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
       }}>
+        {/* Rainbow underline */}
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '2px',
+          background: ColorScheme.primaryGradientBorder
+        }} />
         <h2 style={{
           margin: '0 0 4px 0',
           fontSize: '24px',

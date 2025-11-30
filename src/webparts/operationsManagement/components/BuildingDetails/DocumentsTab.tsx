@@ -125,7 +125,7 @@ export const DocumentsTab: React.FC<IDocumentsTabProps> = ({ building }) => {
           text="Upload Document"
           iconProps={{ iconName: 'Upload' }}
           onClick={handleUpload}
-          styles={ColorScheme.getGlassmorphismButtonStyles()}
+          styles={ColorScheme.getPrimaryButtonStyles()}
         />
 
         <div style={{ display: 'flex', gap: '12px', flex: 1, justifyContent: 'flex-end' }}>

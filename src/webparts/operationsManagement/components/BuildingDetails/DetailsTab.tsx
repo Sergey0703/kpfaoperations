@@ -30,7 +30,7 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
           text="Edit Building"
           iconProps={{ iconName: 'Edit' }}
           onClick={handleEdit}
-          styles={ColorScheme.getGlassmorphismButtonStyles()}
+          styles={ColorScheme.getOutlinedButtonStyles()}
         />
         <DefaultButton
           text="Delete"

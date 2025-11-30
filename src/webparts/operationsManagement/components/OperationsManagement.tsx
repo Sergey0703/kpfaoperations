@@ -51,42 +51,47 @@ export default class OperationsManagement extends React.Component<IOperationsMan
                 alignItems: 'center'
               },
               link: {
-                fontSize: '15px',
+                fontSize: '14px',
                 fontWeight: '500',
                 color: '#605e5c',
-                padding: '16px 20px',
+                padding: '4px 12px',
                 margin: '0 4px',
-                height: '56px',
-                lineHeight: '56px',
+                height: 'auto',
+                borderRadius: '6px',
                 transition: 'all 0.2s ease',
                 selectors: {
                   ':hover': {
                     color: '#323130',
-                    backgroundColor: 'rgba(0, 0, 0, 0.02)'
+                    backgroundColor: 'rgba(0, 0, 0, 0.03)'
                   },
                   ':active': {
                     color: '#323130'
-                  }
-                }
-              },
-              linkIsSelected: {
-                fontSize: '15px',
-                fontWeight: '600',
-                color: '#111827',
-                borderBottom: '2px solid transparent',
-                backgroundImage: 'linear-gradient(90deg, #EA4335, #FBBC04, #34A853, #4285F4, #8B5CF6)',
-                backgroundSize: '100% 2px',
-                backgroundPosition: 'bottom',
-                backgroundRepeat: 'no-repeat',
-                selectors: {
+                  },
                   '::before': {
                     display: 'none'
                   }
                 }
               },
+              linkIsSelected: {
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#4285F4',
+                backgroundColor: '#E6F0FF',
+                borderRadius: '6px',
+                padding: '4px 12px',
+                selectors: {
+                  '::before': {
+                    display: 'none'
+                  },
+                  ':hover': {
+                    backgroundColor: '#D6E7FF'
+                  }
+                }
+              },
               icon: {
                 fontSize: '16px',
-                marginRight: '8px'
+                marginRight: '8px',
+                color: 'inherit'
               }
             }}
           >

@@ -38,47 +38,55 @@ export const ColorScheme = {
   borderRadius: '12px',
   borderWidth: '3px',
 
-  // Glassmorphism Button Styles
-  getGlassmorphismButtonStyles: (): IButtonStyles => ({
+  // Primary Blue Button Styles (Solid Blue - for Add Building)
+  getPrimaryButtonStyles: (): IButtonStyles => ({
     root: {
-      background: 'rgba(255, 255, 255, 0.9)',
-      backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)',
-      border: '1px solid transparent',
-      backgroundImage: `
-        linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-        linear-gradient(90deg, #EA4335, #FBBC04, #34A853, #4285F4, #8B5CF6)
-      `,
-      backgroundOrigin: 'border-box',
-      backgroundClip: 'padding-box, border-box',
-      borderRadius: '8px',
-      color: '#111827',
-      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.08)',
+      background: '#4285F4',
+      border: 'none',
+      borderRadius: '6px',
+      color: '#ffffff',
+      boxShadow: '0 2px 8px rgba(66, 133, 244, 0.3)',
       transition: 'all 0.2s ease',
       height: '36px',
-      padding: '0 16px'
+      padding: '0 20px',
+      fontWeight: '600'
     },
     rootHovered: {
-      background: 'rgba(255, 255, 255, 0.9)',
-      backgroundImage: `
-        linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-        linear-gradient(90deg, #EA4335, #FBBC04, #34A853, #4285F4, #8B5CF6)
-      `,
-      backgroundOrigin: 'border-box',
-      backgroundClip: 'padding-box, border-box',
-      color: '#111827',
-      boxShadow: '0 4px 20px rgba(66, 133, 244, 0.2)',
+      background: '#3367D6',
+      color: '#ffffff',
+      boxShadow: '0 4px 12px rgba(66, 133, 244, 0.4)',
       transform: 'translateY(-1px)'
     },
     rootPressed: {
-      background: 'rgba(255, 255, 255, 0.9)',
-      backgroundImage: `
-        linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-        linear-gradient(90deg, #EA4335, #FBBC04, #34A853, #4285F4, #8B5CF6)
-      `,
-      backgroundOrigin: 'border-box',
-      backgroundClip: 'padding-box, border-box',
-      color: '#111827',
+      background: '#2C5BB3',
+      color: '#ffffff',
+      transform: 'translateY(0)'
+    }
+  }),
+
+  // Outlined Blue Button Styles (White background, Blue text - for Edit Building)
+  getOutlinedButtonStyles: (): IButtonStyles => ({
+    root: {
+      background: '#ffffff',
+      border: '1px solid #4285F4',
+      borderRadius: '6px',
+      color: '#4285F4',
+      boxShadow: 'none',
+      transition: 'all 0.2s ease',
+      height: '36px',
+      padding: '0 20px',
+      fontWeight: '600'
+    },
+    rootHovered: {
+      background: '#F0F7FF',
+      border: '1px solid #3367D6',
+      color: '#3367D6',
+      transform: 'translateY(-1px)'
+    },
+    rootPressed: {
+      background: '#E3F0FF',
+      border: '1px solid #2C5BB3',
+      color: '#2C5BB3',
       transform: 'translateY(0)'
     }
   })
