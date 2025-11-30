@@ -44,7 +44,49 @@ export default class OperationsManagement extends React.Component<IOperationsMan
               root: {
                 borderBottom: '1px solid #edebe9',
                 backgroundColor: '#ffffff',
-                paddingLeft: '16px'
+                paddingLeft: '24px',
+                paddingRight: '24px',
+                height: '56px',
+                display: 'flex',
+                alignItems: 'center'
+              },
+              link: {
+                fontSize: '15px',
+                fontWeight: '500',
+                color: '#605e5c',
+                padding: '16px 20px',
+                margin: '0 4px',
+                height: '56px',
+                lineHeight: '56px',
+                transition: 'all 0.2s ease',
+                selectors: {
+                  ':hover': {
+                    color: '#323130',
+                    backgroundColor: 'rgba(0, 0, 0, 0.02)'
+                  },
+                  ':active': {
+                    color: '#323130'
+                  }
+                }
+              },
+              linkIsSelected: {
+                fontSize: '15px',
+                fontWeight: '600',
+                color: '#111827',
+                borderBottom: '2px solid transparent',
+                backgroundImage: 'linear-gradient(90deg, #EA4335, #FBBC04, #34A853, #4285F4, #8B5CF6)',
+                backgroundSize: '100% 2px',
+                backgroundPosition: 'bottom',
+                backgroundRepeat: 'no-repeat',
+                selectors: {
+                  '::before': {
+                    display: 'none'
+                  }
+                }
+              },
+              icon: {
+                fontSize: '16px',
+                marginRight: '8px'
               }
             }}
           >
