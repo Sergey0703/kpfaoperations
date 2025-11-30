@@ -81,7 +81,8 @@ export const DataProvider: React.FC<IDataProviderProps> = ({ context, useMockDat
   // Filter buildings when search query or showDeleted changes
   React.useEffect(() => {
     filterBuildings();
-  }, [filterBuildings]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.buildings, state.searchQuery, state.showDeleted]);
 
   // ========== Building Actions ==========
 
@@ -364,8 +365,31 @@ export const DataProvider: React.FC<IDataProviderProps> = ({ context, useMockDat
   };
 
   // ========== Actions Object ==========
+  // Create actions ref to maintain stable reference
+  const actionsRef = React.useRef<IDataContextActions>({
+    loadBuildings,
+    selectBuilding,
+    addBuilding,
+    updateBuilding,
+    deleteBuilding,
+    setSearchQuery,
+    setShowDeleted,
+    uploadDocument,
+    downloadDocument,
+    deleteDocument,
+    setActiveTab,
+    openAddDialog,
+    openEditDialog,
+    closeAddEditDialog,
+    openDeleteDialog,
+    closeDeleteDialog,
+    openUploadDialog,
+    closeUploadDialog,
+    clearError
+  });
 
-  const actions: IDataContextActions = {
+  // Update ref on each render to always have latest functions
+  actionsRef.current = {
     loadBuildings,
     selectBuilding,
     addBuilding,
@@ -391,7 +415,7 @@ export const DataProvider: React.FC<IDataProviderProps> = ({ context, useMockDat
 
   const contextValue: IDataContext = {
     state,
-    actions
+    actions: actionsRef.current
   };
 
   return (

@@ -16,7 +16,8 @@ export const BuildingsGallery: React.FC = () => {
     actions.loadBuildings().catch((error) => {
       console.error('Failed to load buildings:', error);
     });
-  }, [actions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only on mount
 
   // Handle search with debounce
   const handleSearch = (value?: string): void => {
