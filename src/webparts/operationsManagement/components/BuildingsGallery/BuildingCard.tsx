@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { IBuilding } from '../../models/IBuilding';
+import { ColorScheme } from '../../styles/ColorScheme';
 
 export interface IBuildingCardProps {
   building: IBuilding;
@@ -18,38 +19,33 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
 
   // Базовые стили
   const baseStyle: React.CSSProperties = {
-    padding: '12px',
+    padding: '16px',
     cursor: 'pointer',
-    borderBottom: '1px solid #f3f3f3',
-    transition: 'all 0.2s ease',
-    marginBottom: '4px'
+    transition: 'all 0.3s ease',
+    marginBottom: '12px',
+    borderRadius: ColorScheme.borderRadius
   };
 
-  // Стили для выбранной карточки
+  // Стили для выбранной карточки с градиентной рамкой
   const selectedStyle: React.CSSProperties = {
     ...baseStyle,
-    backgroundColor: '#f8fbff',
-    color: '#1976d2',
-    fontWeight: '600',
-    borderLeft: '4px solid #0078d4',
-    borderRadius: '6px',
-    margin: '2px 0',
-    boxShadow: isHovered
-      ? '0 4px 16px rgba(0, 120, 212, 0.25)'
-      : '0 2px 8px rgba(0, 120, 212, 0.15)',
-    border: 'none',
-    borderBottom: '1px solid #e8f4fd',
-    transform: isHovered ? 'translateY(-1px)' : 'none'
+    backgroundColor: '#ffffff',
+    border: '1px solid transparent',
+    background: `
+      linear-gradient(white, white) padding-box,
+      ${ColorScheme.primaryGradientBorder} border-box
+    `,
+    boxShadow: isHovered ? ColorScheme.cardShadowHover : ColorScheme.cardShadow,
+    transform: isHovered ? 'translateY(-2px)' : 'none'
   };
 
   // Стили для обычной карточки
   const normalStyle: React.CSSProperties = {
     ...baseStyle,
-    backgroundColor: isHovered ? '#f5f5f5' : '#ffffff',
-    color: '#323130',
-    borderRadius: isHovered ? '4px' : '0',
-    boxShadow: isHovered ? '0 2px 6px rgba(0, 0, 0, 0.1)' : 'none',
-    transform: isHovered ? 'translateY(-1px)' : 'none'
+    backgroundColor: '#ffffff',
+    border: '1px solid #edebe9',
+    boxShadow: isHovered ? '0 4px 12px rgba(0, 0, 0, 0.1)' : '0 2px 4px rgba(0, 0, 0, 0.05)',
+    transform: isHovered ? 'translateY(-2px)' : 'none'
   };
 
   // Стили для удаленной карточки
@@ -74,8 +70,8 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
         <h3 style={{
           margin: 0,
           fontSize: '16px',
-          fontWeight: isSelected ? '600' : '500',
-          color: isSelected ? '#1976d2' : '#323130',
+          fontWeight: '600',
+          color: '#111827',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
@@ -85,11 +81,11 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
         </h3>
         {building.Deleted && (
           <span style={{
-            background: '#d13438',
+            background: ColorScheme.badges.overdue.accent,
             color: '#ffffff',
             fontSize: '10px',
-            padding: '2px 6px',
-            borderRadius: '3px',
+            padding: '4px 8px',
+            borderRadius: '8px',
             textTransform: 'uppercase',
             fontWeight: '600',
             marginLeft: '8px'
@@ -101,9 +97,9 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
 
       {/* Address */}
       <p style={{
-        margin: '0 0 6px 0',
+        margin: '0 0 8px 0',
         fontSize: '13px',
-        color: isSelected ? '#1565c0' : '#605e5c',
+        color: '#6B7280',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         display: '-webkit-box',
@@ -119,9 +115,9 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
         display: 'flex',
         gap: '12px',
         fontSize: '12px',
-        color: isSelected ? '#1976d2' : '#8a8886'
+        color: '#9CA3AF'
       }}>
-        <span>Built: {building.YearBuilt}</span>
+        <span>Built {building.YearBuilt}</span>
         <span>{building.AreaSquareFootage.toLocaleString('en-US', { maximumFractionDigits: 0 })} sq ft</span>
       </div>
     </div>

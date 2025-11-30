@@ -1,11 +1,12 @@
 // Buildings Gallery Component - Buildings list panel with inline styles
 
 import * as React from 'react';
-import { SearchBox, PrimaryButton, Toggle, Spinner, SpinnerSize, MessageBar, MessageBarType } from '@fluentui/react';
+import { SearchBox, Toggle, Spinner, SpinnerSize, MessageBar, MessageBarType } from '@fluentui/react';
 import { useDataContext } from '../Context';
 import { BuildingCard } from './BuildingCard';
 import { IBuilding } from '../../models/IBuilding';
 import { AppConstants } from '../../models/Constants';
+import { ColorScheme } from '../../styles/ColorScheme';
 
 export const BuildingsGallery: React.FC = () => {
   const { state, actions } = useDataContext();
@@ -66,14 +67,45 @@ export const BuildingsGallery: React.FC = () => {
         }}>
           Buildings
         </h2>
-        <PrimaryButton
-          text="Add Building"
-          iconProps={{ iconName: 'Add' }}
+        <button
           onClick={actions.openAddDialog}
-          styles={{
-            root: { width: '100%' }
+          style={{
+            width: '100%',
+            padding: '12px 16px',
+            background: 'rgba(255, 255, 255, 0.9)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            color: '#111827',
+            border: '1px solid transparent',
+            backgroundImage: `
+              linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+              ${ColorScheme.primaryGradientBorder}
+            `,
+            backgroundOrigin: 'border-box',
+            backgroundClip: 'padding-box, border-box',
+            borderRadius: '8px',
+            fontSize: '14px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.08)',
+            transition: 'all 0.2s ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px'
           }}
-        />
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-1px)';
+            e.currentTarget.style.boxShadow = '0 4px 20px rgba(66, 133, 244, 0.2)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.08)';
+          }}
+        >
+          <span style={{ fontSize: '16px', fontWeight: 'bold' }}>+</span>
+          Add Building
+        </button>
       </div>
 
       {/* Search Section */}

@@ -7,6 +7,7 @@ import { IDocument } from '../../models/IDocument';
 import { DocumentType } from '../../models/Enums';
 import { useDataContext } from '../Context';
 import { Formatters } from '../../utils/Formatters';
+import { ColorScheme } from '../../styles/ColorScheme';
 
 export interface IDocumentsTabProps {
   building: IBuilding;
@@ -94,19 +95,19 @@ export const DocumentsTab: React.FC<IDocumentsTabProps> = ({ building }) => {
     { key: 'size', text: 'Sort by Size' }
   ];
 
-  // Get badge color for document type
+  // Get badge color for document type - Vibrant colors
   const getTypeBadgeColor = (docType: string): { bg: string; text: string } => {
     switch (docType) {
       case DocumentType.Contract:
-        return { bg: '#e3f2fd', text: '#1976d2' };
+        return { bg: '#F0E7FE', text: '#8B5CF6' }; // purple
       case DocumentType.Invoice:
-        return { bg: '#fff3e0', text: '#f57c00' };
+        return { bg: '#FCE7F3', text: '#EC4899' }; // pink
       case DocumentType.Photo:
-        return { bg: '#f3e5f5', text: '#7b1fa2' };
+        return { bg: '#FFF7ED', text: '#F97316' }; // orange
       case DocumentType.Report:
-        return { bg: '#e8f5e9', text: '#388e3c' };
+        return { bg: ColorScheme.badges.active.bg, text: ColorScheme.badges.active.color }; // green
       default:
-        return { bg: '#f5f5f5', text: '#616161' };
+        return { bg: '#F3F4F6', text: '#6B7280' }; // gray
     }
   };
 
@@ -124,6 +125,7 @@ export const DocumentsTab: React.FC<IDocumentsTabProps> = ({ building }) => {
           text="Upload Document"
           iconProps={{ iconName: 'Upload' }}
           onClick={handleUpload}
+          styles={ColorScheme.getGlassmorphismButtonStyles()}
         />
 
         <div style={{ display: 'flex', gap: '12px', flex: 1, justifyContent: 'flex-end' }}>

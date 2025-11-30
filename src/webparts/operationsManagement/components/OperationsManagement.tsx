@@ -5,6 +5,7 @@ import { DataProvider } from './Context';
 import { BuildingsGallery } from './BuildingsGallery';
 import { BuildingDetails } from './BuildingDetails';
 import { DialogContainer } from './Dialogs';
+import { ColorSchemePreview } from './ColorSchemePreview';
 import styles from './OperationsManagement.module.scss';
 
 interface IOperationsManagementState {
@@ -51,6 +52,7 @@ export default class OperationsManagement extends React.Component<IOperationsMan
             <PivotItem headerText="Vehicles" itemKey="vehicles" itemIcon="Car" />
             <PivotItem headerText="Reports" itemKey="reports" itemIcon="BarChartVertical" />
             <PivotItem headerText="Settings" itemKey="settings" itemIcon="Settings" />
+            <PivotItem headerText="Design Preview" itemKey="design" itemIcon="Color" />
           </Pivot>
 
           {/* Content based on active tab */}
@@ -84,6 +86,12 @@ export default class OperationsManagement extends React.Component<IOperationsMan
               <div className={styles.comingSoon}>
                 <h2>Settings</h2>
                 <p>Coming soon...</p>
+              </div>
+            )}
+
+            {activeTab === 'design' && (
+              <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
+                <ColorSchemePreview />
               </div>
             )}
           </Stack>

@@ -5,6 +5,7 @@ import { Pivot, PivotItem } from '@fluentui/react';
 import { useDataContext } from '../Context';
 import { DetailsTab } from './DetailsTab';
 import { DocumentsTab } from './DocumentsTab';
+import { ColorScheme } from '../../styles/ColorScheme';
 
 export const BuildingDetails: React.FC = () => {
   const { state, actions } = useDataContext();
@@ -41,24 +42,34 @@ export const BuildingDetails: React.FC = () => {
       height: '100%',
       backgroundColor: '#ffffff'
     }}>
-      {/* Building Header */}
+      {/* Building Header with Glassmorphism */}
       <div style={{
-        padding: '16px 24px',
-        borderBottom: '1px solid #edebe9',
-        backgroundColor: '#f8f9fa'
+        padding: '20px 24px',
+        background: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        border: '1px solid transparent',
+        backgroundImage: `
+          linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+          ${ColorScheme.primaryGradientBorder}
+        `,
+        backgroundOrigin: 'border-box',
+        backgroundClip: 'padding-box, border-box',
+        borderRadius: `${ColorScheme.borderRadius} ${ColorScheme.borderRadius} 0 0`,
+        boxShadow: '0 2px 15px rgba(0, 0, 0, 0.08)'
       }}>
         <h2 style={{
           margin: '0 0 4px 0',
           fontSize: '24px',
           fontWeight: '600',
-          color: '#323130'
+          color: '#111827'
         }}>
           {selectedBuilding.PropertyName}
         </h2>
         <p style={{
           margin: 0,
           fontSize: '14px',
-          color: '#605e5c'
+          color: '#6B7280'
         }}>
           {selectedBuilding.Address}
         </p>

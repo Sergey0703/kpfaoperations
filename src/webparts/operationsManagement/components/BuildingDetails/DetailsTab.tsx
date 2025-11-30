@@ -5,6 +5,7 @@ import { PrimaryButton, DefaultButton, Stack } from '@fluentui/react';
 import { IBuilding } from '../../models/IBuilding';
 import { useDataContext } from '../Context';
 import { Formatters } from '../../utils/Formatters';
+import { ColorScheme } from '../../styles/ColorScheme';
 
 export interface IDetailsTabProps {
   building: IBuilding;
@@ -29,35 +30,43 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
           text="Edit Building"
           iconProps={{ iconName: 'Edit' }}
           onClick={handleEdit}
+          styles={ColorScheme.getGlassmorphismButtonStyles()}
         />
         <DefaultButton
           text="Delete"
           iconProps={{ iconName: 'Delete' }}
           onClick={handleDelete}
           styles={{
-            root: { color: '#d13438' },
-            rootHovered: { color: '#a4262c' }
+            root: {
+              color: '#d13438',
+              border: '1px solid #edebe9'
+            },
+            rootHovered: {
+              color: '#a4262c',
+              backgroundColor: '#FEE2E2'
+            }
           }}
         />
       </Stack>
 
-      {/* Building Information */}
+      {/* Building Information - Grid Layout */}
       <div style={{
-        backgroundColor: '#f8f9fa',
-        padding: '20px',
-        borderRadius: '4px',
-        border: '1px solid #edebe9'
+        backgroundColor: '#ffffff',
+        padding: '24px',
+        borderRadius: ColorScheme.borderRadius,
+        border: '1px solid #edebe9',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
       }}>
         <h3 style={{
-          margin: '0 0 16px 0',
+          margin: '0 0 20px 0',
           fontSize: '18px',
           fontWeight: '600',
-          color: '#323130'
+          color: '#111827'
         }}>
           Building Information
         </h3>
 
-        <div style={{ display: 'grid', gap: '16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
           {/* Property Name */}
           <div>
             <label style={{
