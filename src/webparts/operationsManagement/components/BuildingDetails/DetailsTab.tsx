@@ -1,7 +1,7 @@
 // Details Tab - Shows building information
 
 import * as React from 'react';
-import { PrimaryButton, DefaultButton, Stack } from '@fluentui/react';
+import { PrimaryButton, DefaultButton, Stack, DatePicker, DayOfWeek } from '@fluentui/react';
 import { IBuilding } from '../../models/IBuilding';
 import { useDataContext } from '../Context';
 import { Formatters } from '../../utils/Formatters';
@@ -20,6 +20,17 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
 
   const handleDelete = (): void => {
     actions.openDeleteDialog(building);
+  };
+
+  const handleCommissioningDateChange = (date: Date | null | undefined): void => {
+    if (date && building.Id) {
+      // Update building with new commissioning date
+      actions.updateBuilding(building.Id, {
+        CommissioningDate: date
+      }).catch((error) => {
+        console.error('Failed to update commissioning date:', error);
+      });
+    }
   };
 
   return (
@@ -146,6 +157,37 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
                 {Formatters.formatArea(building.AreaSquareFootage)}
               </div>
             </div>
+          </div>
+
+          {/* Commissioning Date - Full width */}
+          <div style={{ gridColumn: '1 / -1' }}>
+            <label style={{
+              display: 'block',
+              fontSize: '12px',
+              fontWeight: '600',
+              color: '#605e5c',
+              marginBottom: '8px',
+              textTransform: 'uppercase'
+            }}>
+              Дата начала эксплуатации
+            </label>
+            <DatePicker
+              value={building.CommissioningDate ? new Date(building.CommissioningDate) : undefined}
+              onSelectDate={handleCommissioningDateChange}
+              firstDayOfWeek={DayOfWeek.Monday}
+              placeholder="Выберите дату"
+              ariaLabel="Выберите дату начала эксплуатации"
+              formatDate={(date) => date ? Formatters.formatDate(date) : ''}
+              styles={{
+                root: { maxWidth: '300px' },
+                textField: {
+                  fieldGroup: {
+                    borderRadius: '6px',
+                    border: '1px solid #edebe9'
+                  }
+                }
+              }}
+            />
           </div>
 
           {/* Metadata */}

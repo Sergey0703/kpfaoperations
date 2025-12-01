@@ -26,6 +26,7 @@ export class MockDataService implements IDataService {
         Address: '15-19 Amiens St, Dublin 1',
         YearBuilt: 1878,
         AreaSquareFootage: 45000,
+        CommissioningDate: new Date('1880-06-15'),
         Deleted: false,
         Created: new Date('2024-01-15'),
         Modified: new Date('2024-11-20'),

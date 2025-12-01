@@ -6,6 +6,7 @@ export interface IBuilding {
   Address: string;
   YearBuilt: number;
   AreaSquareFootage: number;
+  CommissioningDate?: Date;       // Дата начала эксплуатации
   Deleted: boolean;               // Soft delete flag
   Created?: Date;
   Modified?: Date;
