@@ -50,7 +50,7 @@ export const BuildingsGallery: React.FC = () => {
       flexDirection: 'column',
       height: '100%',
       backgroundColor: '#F3F4F6', // Softer gray background
-      borderRight: '1px solid #8AB4F8', // Blue border
+      borderRight: '1px solid #E5E7EB',
       position: 'relative'
     }}>
       {/* Header - Sticky & Glassmorphic */}
@@ -58,7 +58,7 @@ export const BuildingsGallery: React.FC = () => {
         padding: '20px',
         backgroundColor: 'rgba(255, 255, 255, 0.9)',
         backdropFilter: 'blur(8px)',
-        borderBottom: '1px solid rgba(66, 133, 244, 0.2)', // Slight blue tint for header border too
+        borderBottom: '1px solid rgba(229, 231, 235, 0.5)',
         position: 'sticky',
         top: 0,
         zIndex: 10

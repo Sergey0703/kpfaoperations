@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { IBuilding } from '../../models/IBuilding';
-import { ColorScheme } from '../../styles/ColorScheme';
+import { Formatters } from '../../utils/Formatters';
 
 export interface IBuildingCardProps {
   building: IBuilding;
@@ -29,21 +29,19 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
     border: '1px solid transparent' // Placeholder for border transitions
   };
 
-  // Selected Style - Gradient Border & Glow
+  // Selected Style - Blue Border & Glow
   const selectedStyle: React.CSSProperties = {
     ...baseStyle,
-    background: `
-      linear-gradient(#ffffff, #ffffff) padding-box,
-      ${ColorScheme.primaryGradientBorder} border-box
-    `,
-    boxShadow: '0 12px 24px -8px rgba(66, 133, 244, 0.15), 0 4px 8px -4px rgba(66, 133, 244, 0.1)',
+    background: '#ffffff',
+    border: '1px solid #4285F4', // Solid Blue Border
+    boxShadow: '0 4px 12px rgba(66, 133, 244, 0.15)',
     transform: 'translateY(-2px)'
   };
 
-  // Normal Style - Clean & Soft
+  // Normal Style - No Border
   const normalStyle: React.CSSProperties = {
     ...baseStyle,
-    border: '1px solid rgba(229, 231, 235, 0.5)', // Very subtle border
+    border: '1px solid transparent', // No visible border
     boxShadow: isHovered
       ? '0 12px 20px -8px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04)' // Elevated on hover
       : '0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02)', // Flat when idle
@@ -136,6 +134,16 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
         }}>
           {building.AreaSquareFootage.toLocaleString('en-US', { maximumFractionDigits: 0 })} sq ft
         </span>
+        {building.CommissioningDate && (
+          <span style={{
+            background: '#F3F4F6',
+            padding: '4px 8px',
+            borderRadius: '6px',
+            fontWeight: '500'
+          }}>
+            Commissioned {Formatters.formatDate(building.CommissioningDate)}
+          </span>
+        )}
       </div>
     </div>
   );
