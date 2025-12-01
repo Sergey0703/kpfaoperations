@@ -19,6 +19,16 @@ export const BuildingsGallery: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only on mount
 
+  // Auto-select first building when filteredBuildings changes and no building is selected
+  React.useEffect(() => {
+    if (!state.selectedBuilding && state.filteredBuildings.length > 0) {
+      actions.selectBuilding(state.filteredBuildings[0]).catch((error) => {
+        console.error('Failed to auto-select first building:', error);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.filteredBuildings, state.selectedBuilding]);
+
   // Handle search with debounce
   const handleSearch = (value?: string): void => {
     if (searchTimeout) {
