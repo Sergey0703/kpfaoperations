@@ -1,4 +1,4 @@
-// Buildings Gallery Component - Buildings list panel with inline styles
+// Buildings Gallery Component - Warm Modern Style
 
 import * as React from 'react';
 import { SearchBox, Toggle, Spinner, SpinnerSize, MessageBar, MessageBarType } from '@fluentui/react';
@@ -10,6 +10,16 @@ import { AppConstants } from '../../models/Constants';
 export const BuildingsGallery: React.FC = () => {
   const { state, actions } = useDataContext();
   const [searchTimeout, setSearchTimeout] = React.useState<NodeJS.Timeout | undefined>(undefined);
+
+  // Warm Modern Color Palette
+  const colors = {
+    cream: '#F5F1E8',
+    terracotta: '#D4735A',
+    sand: '#E8DCC4',
+    warmWhite: '#FDFCFA',
+    charcoal: '#2D2A26',
+    warmGray: '#6B6660'
+  };
 
   // Load buildings on mount
   React.useEffect(() => {
@@ -59,16 +69,16 @@ export const BuildingsGallery: React.FC = () => {
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
-      backgroundColor: '#F3F4F6', // Softer gray background
-      borderRight: '1px solid #E5E7EB',
-      position: 'relative'
+      background: `linear-gradient(180deg, ${colors.cream} 0%, ${colors.sand}40 100%)`,
+      borderRight: `1px solid ${colors.sand}`,
+      position: 'relative',
+      fontFamily: '"Inter", -apple-system, system-ui, sans-serif'
     }}>
-      {/* Header - Sticky & Glassmorphic */}
+      {/* Header */}
       <div style={{
-        padding: '20px',
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        backdropFilter: 'blur(8px)',
-        borderBottom: '1px solid rgba(229, 231, 235, 0.5)',
+        padding: '24px 20px',
+        background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
+        borderBottom: `1px solid ${colors.sand}`,
         position: 'sticky',
         top: 0,
         zIndex: 10
@@ -77,9 +87,9 @@ export const BuildingsGallery: React.FC = () => {
           <h2 style={{
             margin: 0,
             fontSize: '24px',
-            fontWeight: '700',
-            color: '#111827',
-            letterSpacing: '-0.02em'
+            fontWeight: '600',
+            color: colors.charcoal,
+            letterSpacing: '-0.01em'
           }}>
             Buildings
           </h2>
@@ -89,33 +99,34 @@ export const BuildingsGallery: React.FC = () => {
           onClick={actions.openAddDialog}
           style={{
             width: '100%',
-            padding: '12px 20px',
-            background: '#4285F4', // Solid Blue
+            padding: '14px 20px',
+            background: `linear-gradient(135deg, ${colors.terracotta} 0%, ${colors.terracotta}dd 100%)`,
             color: '#ffffff',
             border: 'none',
             borderRadius: '12px',
             fontSize: '15px',
             fontWeight: '600',
             cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(66, 133, 244, 0.3)',
-            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+            boxShadow: `0 4px 16px rgba(212, 115, 90, 0.25)`,
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '8px'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-1px)';
-            e.currentTarget.style.background = '#3367D6'; // Darker blue on hover
-            e.currentTarget.style.boxShadow = '0 6px 16px rgba(66, 133, 244, 0.4)';
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = `0 6px 20px rgba(212, 115, 90, 0.35)`;
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.background = '#4285F4';
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(66, 133, 244, 0.3)';
+            e.currentTarget.style.boxShadow = `0 4px 16px rgba(212, 115, 90, 0.25)`;
           }}
         >
-          <span style={{ fontSize: '18px', fontWeight: 'bold' }}>+</span>
+          {/* SVG Plus Icon */}
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 3.75V14.25M3.75 9H14.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
           Add Building
         </button>
       </div>
@@ -123,8 +134,8 @@ export const BuildingsGallery: React.FC = () => {
       {/* Search Section */}
       <div style={{
         padding: '16px 20px',
-        backgroundColor: '#ffffff',
-        borderBottom: '1px solid #E5E7EB'
+        background: colors.warmWhite,
+        borderBottom: `1px solid ${colors.sand}`
       }}>
         <SearchBox
           placeholder="Search buildings..."
@@ -132,11 +143,12 @@ export const BuildingsGallery: React.FC = () => {
           styles={{
             root: {
               marginBottom: '12px',
-              borderRadius: '8px',
-              border: '1px solid #E5E7EB',
-              height: '40px'
+              borderRadius: '10px',
+              border: `1px solid ${colors.sand}`,
+              height: '42px',
+              background: colors.warmWhite
             },
-            iconContainer: { color: '#6B7280' }
+            iconContainer: { color: colors.warmGray }
           }}
         />
         <Toggle
@@ -145,7 +157,7 @@ export const BuildingsGallery: React.FC = () => {
           onChange={handleShowDeletedChange}
           styles={{
             root: { margin: 0 },
-            label: { fontWeight: '500', color: '#4B5563' }
+            label: { fontWeight: '500', color: colors.charcoal }
           }}
         />
       </div>
@@ -181,18 +193,20 @@ export const BuildingsGallery: React.FC = () => {
         <div style={{
           padding: '60px 20px',
           textAlign: 'center',
-          color: '#6B7280',
+          color: colors.warmGray,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           gap: '12px'
         }}>
-          <div style={{
-            fontSize: '48px',
-            marginBottom: '8px',
-            opacity: 0.5
-          }}>🏢</div>
-          <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600', color: '#374151' }}>No buildings found</h3>
+          {/* SVG Building Icon */}
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style={{ opacity: 0.4 }}>
+            <rect x="12" y="16" width="40" height="40" rx="4" stroke={colors.charcoal} strokeWidth="2"/>
+            <path d="M12 24h40M20 16v40M32 16v40M44 16v40" stroke={colors.charcoal} strokeWidth="2"/>
+            <rect x="24" y="32" width="6" height="8" fill={colors.charcoal}/>
+            <rect x="34" y="32" width="6" height="8" fill={colors.charcoal}/>
+          </svg>
+          <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600', color: colors.charcoal }}>No buildings found</h3>
           <p style={{ margin: 0, fontSize: '14px' }}>{AppConstants.MSG_NO_BUILDINGS}</p>
         </div>
       )}

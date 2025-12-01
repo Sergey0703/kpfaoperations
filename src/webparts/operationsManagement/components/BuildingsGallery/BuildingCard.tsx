@@ -1,4 +1,4 @@
-// Building Card Component - Individual building card in the gallery
+// Building Card Component - Warm Modern Style
 
 import * as React from 'react';
 import { IBuilding } from '../../models/IBuilding';
@@ -17,40 +17,51 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
     onClick(building);
   };
 
-  // Modern Card Styles
+  // Warm Modern Color Palette
+  const colors = {
+    cream: '#F5F1E8',
+    terracotta: '#D4735A',
+    sage: '#8B9D83',
+    skyBlue: '#6BA3C8',
+    sand: '#E8DCC4',
+    warmWhite: '#FDFCFA',
+    charcoal: '#2D2A26'
+  };
+
+  // Base Card Styles
   const baseStyle: React.CSSProperties = {
     padding: '20px',
     cursor: 'pointer',
-    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     marginBottom: '16px',
-    borderRadius: '16px',
+    borderRadius: '12px',
     position: 'relative',
-    background: '#ffffff',
-    border: '1px solid transparent' // Placeholder for border transitions
+    fontFamily: '"Inter", -apple-system, system-ui, sans-serif'
   };
 
-  // Selected Style - Blue Border & Glow
+  // Selected Style - Warm accent
   const selectedStyle: React.CSSProperties = {
     ...baseStyle,
-    background: '#ffffff',
-    border: '1px solid #4285F4', // Solid Blue Border
-    boxShadow: '0 4px 12px rgba(66, 133, 244, 0.15)',
+    background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
+    border: `2px solid ${colors.terracotta}`,
+    boxShadow: `0 8px 24px rgba(212, 115, 90, 0.2), 0 2px 8px rgba(45, 42, 38, 0.08)`,
     transform: 'translateY(-2px)'
   };
 
-  // Normal Style - No Border
+  // Normal Style
   const normalStyle: React.CSSProperties = {
     ...baseStyle,
-    border: '1px solid transparent', // No visible border
+    background: colors.warmWhite,
+    border: `1px solid ${colors.sand}`,
     boxShadow: isHovered
-      ? '0 12px 20px -8px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04)' // Elevated on hover
-      : '0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02)', // Flat when idle
+      ? '0 8px 16px rgba(45, 42, 38, 0.08)'
+      : '0 2px 8px rgba(45, 42, 38, 0.04)',
     transform: isHovered ? 'translateY(-2px)' : 'none'
   };
 
   // Deleted Style
   const deletedStyle: React.CSSProperties = {
-    opacity: 0.7,
+    opacity: 0.6,
     background: '#F9FAFB',
     border: '1px dashed #D1D5DB'
   };
@@ -65,15 +76,33 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Decorative stripe for selected card */}
+      {isSelected && (
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '4px',
+          background: `linear-gradient(90deg, ${colors.terracotta}, ${colors.sage}, ${colors.skyBlue})`,
+          borderRadius: '12px 12px 0 0'
+        }} />
+      )}
+
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        marginBottom: '8px',
+        marginTop: isSelected ? '4px' : '0'
+      }}>
         <h3 style={{
           margin: 0,
           fontSize: '16px',
-          fontWeight: '700',
-          color: '#111827',
+          fontWeight: '600',
+          color: colors.charcoal,
           lineHeight: '1.4',
-          letterSpacing: '-0.01em',
           flex: 1
         }}>
           {building.PropertyName}
@@ -83,8 +112,8 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
             background: '#FEF2F2',
             color: '#991B1B',
             fontSize: '11px',
-            padding: '2px 8px',
-            borderRadius: '9999px',
+            padding: '3px 10px',
+            borderRadius: '12px',
             fontWeight: '600',
             marginLeft: '8px',
             border: '1px solid #FECACA'
@@ -99,7 +128,7 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
         <p style={{
           margin: 0,
           fontSize: '13px',
-          color: '#6B7280',
+          color: '#6B6660',
           lineHeight: '1.5',
           display: '-webkit-box',
           WebkitLineClamp: 2,
@@ -115,36 +144,67 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
         display: 'flex',
         flexWrap: 'wrap',
         gap: '8px',
-        fontSize: '12px',
-        color: '#4B5563'
+        fontSize: '12px'
       }}>
         <span style={{
-          background: '#F3F4F6',
-          padding: '4px 8px',
-          borderRadius: '6px',
-          fontWeight: '500'
+          background: colors.cream,
+          color: colors.charcoal,
+          padding: '6px 12px',
+          borderRadius: '8px',
+          fontWeight: '500',
+          border: `1px solid ${colors.sand}`
         }}>
-          {building.YearBuilt}
+          Built {building.YearBuilt}
         </span>
         <span style={{
-          background: '#F3F4F6',
-          padding: '4px 8px',
-          borderRadius: '6px',
-          fontWeight: '500'
+          background: colors.cream,
+          color: colors.charcoal,
+          padding: '6px 12px',
+          borderRadius: '8px',
+          fontWeight: '500',
+          border: `1px solid ${colors.sand}`
         }}>
           {building.AreaSquareFootage.toLocaleString('en-US', { maximumFractionDigits: 0 })} sq ft
         </span>
         {building.CommissioningDate && (
           <span style={{
-            background: '#F3F4F6',
-            padding: '4px 8px',
-            borderRadius: '6px',
-            fontWeight: '500'
+            background: `linear-gradient(135deg, ${colors.sage}20, ${colors.skyBlue}20)`,
+            color: colors.charcoal,
+            padding: '6px 12px',
+            borderRadius: '8px',
+            fontWeight: '500',
+            border: `1px solid ${colors.sage}40`
           }}>
             Commissioned {Formatters.formatDate(building.CommissioningDate)}
           </span>
         )}
       </div>
+
+      {/* Decorative corner accent for selected */}
+      {isSelected && (
+        <>
+          <div style={{
+            position: 'absolute',
+            bottom: 12,
+            right: 12,
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${colors.terracotta}15, transparent)`,
+            pointerEvents: 'none'
+          }} />
+          <div style={{
+            position: 'absolute',
+            top: 20,
+            right: 16,
+            width: '24px',
+            height: '24px',
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${colors.sage}12, transparent)`,
+            pointerEvents: 'none'
+          }} />
+        </>
+      )}
     </div>
   );
 };

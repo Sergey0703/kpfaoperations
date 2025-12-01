@@ -1,15 +1,26 @@
-// Building Details Component - Right panel with Details/Documents tabs
+// Building Details Component - Warm Modern Style
 
 import * as React from 'react';
 import { Pivot, PivotItem } from '@fluentui/react';
 import { useDataContext } from '../Context';
 import { DetailsTab } from './DetailsTab';
 import { DocumentsTab } from './DocumentsTab';
-import { ColorScheme } from '../../styles/ColorScheme';
 
 export const BuildingDetails: React.FC = () => {
   const { state, actions } = useDataContext();
   const { selectedBuilding, activeTab } = state;
+
+  // Warm Modern Color Palette
+  const colors = {
+    cream: '#F5F1E8',
+    terracotta: '#D4735A',
+    sage: '#8B9D83',
+    skyBlue: '#6BA3C8',
+    sand: '#E8DCC4',
+    warmWhite: '#FDFCFA',
+    charcoal: '#2D2A26',
+    warmGray: '#6B6660'
+  };
 
   if (!selectedBuilding) {
     return (
@@ -19,16 +30,23 @@ export const BuildingDetails: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
-        color: '#6B7280',
-        backgroundColor: '#F9FAFB',
-        gap: '16px'
+        color: colors.warmGray,
+        background: `linear-gradient(135deg, ${colors.cream} 0%, ${colors.sand}40 100%)`,
+        gap: '16px',
+        fontFamily: '"Inter", -apple-system, system-ui, sans-serif'
       }}>
-        <div style={{ fontSize: '64px', opacity: 0.2 }}>🏢</div>
+        {/* SVG Building Icon */}
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style={{ opacity: 0.3 }}>
+          <rect x="20" y="24" width="40" height="40" rx="4" stroke={colors.charcoal} strokeWidth="2.5"/>
+          <path d="M20 32h40M28 24v40M40 24v40M52 24v40" stroke={colors.charcoal} strokeWidth="2.5"/>
+          <rect x="32" y="40" width="6" height="10" fill={colors.charcoal}/>
+          <rect x="42" y="40" width="6" height="10" fill={colors.charcoal}/>
+        </svg>
         <h2 style={{
           fontSize: '24px',
           fontWeight: '600',
           margin: 0,
-          color: '#374151'
+          color: colors.charcoal
         }}>
           Select a building
         </h2>
@@ -44,32 +62,55 @@ export const BuildingDetails: React.FC = () => {
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
-      backgroundColor: '#F9FAFB' // Light gray background for the whole panel
+      background: `linear-gradient(135deg, ${colors.cream} 0%, ${colors.sand}40 100%)`,
+      fontFamily: '"Inter", -apple-system, system-ui, sans-serif'
     }}>
-      {/* Building Header with Rainbow Underline */}
+      {/* Building Header with Decorative Stripe */}
       <div style={{
-        padding: '32px 40px',
-        background: '#ffffff',
+        padding: '40px',
+        background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
         position: 'relative',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
-        zIndex: 5
+        boxShadow: `0 4px 16px rgba(45, 42, 38, 0.06)`
       }}>
-        {/* Rainbow underline */}
+        {/* Decorative color stripe */}
         <div style={{
           position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
-          height: '3px',
-          background: ColorScheme.primaryGradientBorder
+          height: '4px',
+          background: `linear-gradient(90deg, ${colors.terracotta}, ${colors.sage}, ${colors.skyBlue})`
+        }} />
+
+        {/* Decorative circular elements */}
+        <div style={{
+          position: 'absolute',
+          top: 20,
+          right: 40,
+          width: '80px',
+          height: '80px',
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${colors.terracotta}08 0%, transparent 70%)`,
+          pointerEvents: 'none'
+        }} />
+        <div style={{
+          position: 'absolute',
+          top: 60,
+          right: 80,
+          width: '120px',
+          height: '120px',
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${colors.sage}06 0%, transparent 70%)`,
+          pointerEvents: 'none'
         }} />
 
         <h2 style={{
           margin: '0 0 8px 0',
           fontSize: '32px',
-          fontWeight: '800',
-          color: '#111827',
-          letterSpacing: '-0.02em'
+          fontWeight: '600',
+          color: colors.charcoal,
+          letterSpacing: '-0.01em',
+          position: 'relative'
         }}>
           {selectedBuilding.PropertyName}
         </h2>
@@ -78,7 +119,8 @@ export const BuildingDetails: React.FC = () => {
           margin: '4px 0 0 0',
           fontSize: '16px',
           fontWeight: '500',
-          color: '#6B7280'
+          color: colors.warmGray,
+          position: 'relative'
         }}>
           {selectedBuilding.Address}
         </p>
@@ -86,9 +128,9 @@ export const BuildingDetails: React.FC = () => {
 
       {/* Tabs */}
       <div style={{
-        backgroundColor: '#ffffff',
+        background: colors.warmWhite,
         paddingLeft: '24px',
-        borderBottom: '1px solid #E5E7EB'
+        borderBottom: `1px solid ${colors.sand}`
       }}>
         <Pivot
           selectedKey={activeTab}
@@ -99,8 +141,30 @@ export const BuildingDetails: React.FC = () => {
           }}
           styles={{
             root: { height: '48px' },
-            link: { height: '48px', fontSize: '14px', fontWeight: '600' },
-            linkIsSelected: { height: '48px', fontSize: '14px', fontWeight: '700' }
+            link: {
+              height: '48px',
+              fontSize: '14px',
+              fontWeight: '600',
+              color: colors.warmGray,
+              selectors: {
+                ':hover': {
+                  color: colors.charcoal,
+                  backgroundColor: `${colors.sand}40`
+                }
+              }
+            },
+            linkIsSelected: {
+              height: '48px',
+              fontSize: '14px',
+              fontWeight: '700',
+              color: colors.terracotta,
+              selectors: {
+                '::before': {
+                  height: '3px',
+                  backgroundColor: colors.terracotta
+                }
+              }
+            }
           }}
         >
           <PivotItem headerText="Details" itemKey="details" itemIcon="Info" />
