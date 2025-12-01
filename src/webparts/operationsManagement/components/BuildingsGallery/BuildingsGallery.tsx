@@ -76,56 +76,92 @@ export const BuildingsGallery: React.FC = () => {
     }}>
       {/* Header */}
       <div style={{
-        padding: '24px 20px',
-        background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
-        borderBottom: `1px solid ${colors.sand}`,
-        position: 'sticky',
+        padding: '32px 24px',
+        background: `linear-gradient(135deg, #4A7C8F 0%, #6BA3C8 100%)`,
+        position: 'relative',
         top: 0,
-        zIndex: 10
+        zIndex: 10,
+        overflow: 'hidden'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        {/* Organic shapes in background */}
+        <svg style={{
+          position: 'absolute',
+          top: -20,
+          right: -20,
+          width: '120px',
+          height: '120px',
+          opacity: 0.15
+        }}>
+          <circle cx="60" cy="60" r="50" fill="white" />
+          <circle cx="80" cy="40" r="30" fill="white" />
+        </svg>
+
+        <div style={{
+          position: 'relative',
+          zIndex: 1,
+          color: 'white'
+        }}>
+          <div style={{
+            fontSize: '11px',
+            fontWeight: '600',
+            letterSpacing: '1.5px',
+            opacity: 0.85,
+            marginBottom: '12px',
+            textTransform: 'uppercase'
+          }}>
+            Property Portfolio
+          </div>
           <h2 style={{
             margin: 0,
-            fontSize: '24px',
-            fontWeight: '600',
-            color: colors.charcoal,
-            letterSpacing: '-0.01em'
+            fontSize: '28px',
+            fontWeight: '700',
+            letterSpacing: '-0.5px'
           }}>
             Buildings
           </h2>
+          <div style={{
+            marginTop: '16px',
+            height: '3px',
+            width: '60px',
+            background: colors.terracotta,
+            borderRadius: '2px'
+          }} />
         </div>
 
         <button
           onClick={actions.openAddDialog}
           style={{
             width: '100%',
-            padding: '14px 20px',
-            background: `linear-gradient(135deg, ${colors.terracotta} 0%, ${colors.terracotta}dd 100%)`,
-            color: '#ffffff',
+            padding: '18px 28px',
+            background: `linear-gradient(135deg, ${colors.terracotta} 0%, #B8664E 100%)`,
+            color: 'white',
             border: 'none',
-            borderRadius: '12px',
-            fontSize: '15px',
-            fontWeight: '600',
+            borderRadius: '14px',
+            fontSize: '16px',
+            fontWeight: '700',
             cursor: 'pointer',
-            boxShadow: `0 4px 16px rgba(212, 115, 90, 0.25)`,
+            boxShadow: '0 6px 20px rgba(212, 115, 90, 0.35), 0 2px 8px rgba(212, 115, 90, 0.2)',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px'
+            gap: '12px',
+            marginTop: '24px',
+            letterSpacing: '0.3px'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = `0 6px 20px rgba(212, 115, 90, 0.35)`;
+            e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
+            e.currentTarget.style.boxShadow = '0 8px 28px rgba(212, 115, 90, 0.45), 0 4px 12px rgba(212, 115, 90, 0.3)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = `0 4px 16px rgba(212, 115, 90, 0.25)`;
+            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+            e.currentTarget.style.boxShadow = '0 6px 20px rgba(212, 115, 90, 0.35), 0 2px 8px rgba(212, 115, 90, 0.2)';
           }}
         >
-          {/* SVG Plus Icon */}
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M9 3.75V14.25M3.75 9H14.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          {/* SVG Plus Icon - Enhanced */}
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="9" stroke="white" strokeWidth="1.5" opacity="0.3" />
+            <path d="M10 5V15M5 10H15" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
           Add Building
         </button>
@@ -133,22 +169,29 @@ export const BuildingsGallery: React.FC = () => {
 
       {/* Search Section */}
       <div style={{
-        padding: '16px 20px',
+        padding: '20px 20px 16px',
         background: colors.warmWhite,
         borderBottom: `1px solid ${colors.sand}`
       }}>
         <SearchBox
-          placeholder="Search buildings..."
+          placeholder="Search properties..."
           onChange={(_ev, value) => handleSearch(value)}
           styles={{
             root: {
               marginBottom: '12px',
-              borderRadius: '10px',
-              border: `1px solid ${colors.sand}`,
-              height: '42px',
-              background: colors.warmWhite
+              borderRadius: '8px',
+              border: `2px solid ${colors.sand}`,
+              height: '44px',
+              background: colors.cream,
+              transition: 'all 0.2s ease'
             },
-            iconContainer: { color: colors.warmGray }
+            iconContainer: { color: colors.warmGray },
+            field: {
+              color: colors.charcoal,
+              '::placeholder': {
+                color: colors.warmGray
+              }
+            }
           }}
         />
         <Toggle
@@ -201,10 +244,10 @@ export const BuildingsGallery: React.FC = () => {
         }}>
           {/* SVG Building Icon */}
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style={{ opacity: 0.4 }}>
-            <rect x="12" y="16" width="40" height="40" rx="4" stroke={colors.charcoal} strokeWidth="2"/>
-            <path d="M12 24h40M20 16v40M32 16v40M44 16v40" stroke={colors.charcoal} strokeWidth="2"/>
-            <rect x="24" y="32" width="6" height="8" fill={colors.charcoal}/>
-            <rect x="34" y="32" width="6" height="8" fill={colors.charcoal}/>
+            <rect x="12" y="16" width="40" height="40" rx="4" stroke={colors.charcoal} strokeWidth="2" />
+            <path d="M12 24h40M20 16v40M32 16v40M44 16v40" stroke={colors.charcoal} strokeWidth="2" />
+            <rect x="24" y="32" width="6" height="8" fill={colors.charcoal} />
+            <rect x="34" y="32" width="6" height="8" fill={colors.charcoal} />
           </svg>
           <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600', color: colors.charcoal }}>No buildings found</h3>
           <p style={{ margin: 0, fontSize: '14px' }}>{AppConstants.MSG_NO_BUILDINGS}</p>

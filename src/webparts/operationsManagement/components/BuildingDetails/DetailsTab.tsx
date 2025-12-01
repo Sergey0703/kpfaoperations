@@ -22,7 +22,8 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
     sand: '#E8DCC4',
     warmWhite: '#FDFCFA',
     charcoal: '#2D2A26',
-    warmGray: '#6B6660'
+    warmGray: '#6B6660',
+    lightGray: '#9B9690'
   };
 
   const handleEdit = (): void => {
@@ -46,39 +47,90 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
 
   return (
     <div style={{ fontFamily: '"Inter", -apple-system, system-ui, sans-serif' }}>
+      {/* Status Section */}
+      <div style={{
+        padding: '32px 0 24px',
+        background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
+        marginBottom: '32px',
+        borderRadius: '16px',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Decorative circles */}
+        <div style={{
+          position: 'absolute',
+          top: -40,
+          right: -40,
+          width: '160px',
+          height: '160px',
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${colors.terracotta}08, transparent)`,
+          pointerEvents: 'none'
+        }} />
+
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          {/* Status pill */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '8px 20px',
+            background: colors.warmWhite,
+            border: `2px solid ${colors.sage}30`,
+            borderRadius: '24px',
+            marginBottom: '20px',
+            boxShadow: '0 2px 8px rgba(139, 157, 131, 0.1)'
+          }}>
+            <div style={{
+              width: '10px',
+              height: '10px',
+              borderRadius: '50%',
+              background: colors.sage
+            }} />
+            <span style={{
+              fontSize: '13px',
+              fontWeight: '600',
+              color: colors.sage,
+              letterSpacing: '0.5px'
+            }}>
+              Active Property
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* Action Buttons */}
       <Stack horizontal tokens={{ childrenGap: 12 }} style={{ marginBottom: '32px' }}>
         <button
           onClick={handleEdit}
           style={{
-            background: colors.warmWhite,
-            border: `2px solid ${colors.sage}`,
-            borderRadius: '12px',
-            padding: '12px 20px',
-            color: colors.sage,
-            fontSize: '14px',
+            padding: '14px 28px',
+            background: `linear-gradient(135deg, #4A7C8F, ${colors.skyBlue})`,
+            color: 'white',
+            border: 'none',
+            borderRadius: '10px',
+            fontSize: '15px',
             fontWeight: '600',
             cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: '0 4px 16px rgba(74, 124, 143, 0.25)',
+            letterSpacing: '0.2px',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            transition: 'all 0.3s ease',
-            boxShadow: `0 2px 8px rgba(139, 157, 131, 0.15)`
+            gap: '8px'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = `${colors.sage}15`;
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = `0 4px 12px rgba(139, 157, 131, 0.25)`;
+            e.currentTarget.style.boxShadow = '0 6px 20px rgba(74, 124, 143, 0.35)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = colors.warmWhite;
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = `0 2px 8px rgba(139, 157, 131, 0.15)`;
+            e.currentTarget.style.boxShadow = '0 4px 16px rgba(74, 124, 143, 0.25)';
           }}
         >
           {/* SVG Edit Icon */}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M11.333 2.00004C11.5081 1.82494 11.716 1.68605 11.9447 1.59129C12.1735 1.49653 12.4187 1.44775 12.6663 1.44775C12.914 1.44775 13.1592 1.49653 13.3879 1.59129C13.6167 1.68605 13.8246 1.82494 13.9997 2.00004C14.1748 2.17513 14.3137 2.383 14.4084 2.61178C14.5032 2.84055 14.552 3.08575 14.552 3.33337C14.552 3.58099 14.5032 3.82619 14.4084 4.05497C14.3137 4.28374 14.1748 4.49161 13.9997 4.66671L5.33301 13.3334L1.33301 14.6667L2.66634 10.6667L11.333 2.00004Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M11.333 2.00004C11.5081 1.82494 11.716 1.68605 11.9447 1.59129C12.1735 1.49653 12.4187 1.44775 12.6663 1.44775C12.914 1.44775 13.1592 1.49653 13.3879 1.59129C13.6167 1.68605 13.8246 1.82494 13.9997 2.00004C14.1748 2.17513 14.3137 2.383 14.4084 2.61178C14.5032 2.84055 14.552 3.08575 14.552 3.33337C14.552 3.58099 14.5032 3.82619 14.4084 4.05497C14.3137 4.28374 14.1748 4.49161 13.9997 4.66671L5.33301 13.3334L1.33301 14.6667L2.66634 10.6667L11.333 2.00004Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           Edit Building
         </button>
@@ -86,45 +138,189 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
         <button
           onClick={handleDelete}
           style={{
-            background: '#FEF2F2',
-            border: '2px solid #FECACA',
-            borderRadius: '12px',
-            padding: '12px 20px',
-            color: '#991B1B',
-            fontSize: '14px',
+            padding: '14px 28px',
+            background: colors.warmWhite,
+            color: colors.terracotta,
+            border: `2px solid ${colors.sand}`,
+            borderRadius: '10px',
+            fontSize: '15px',
             fontWeight: '600',
             cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            letterSpacing: '0.2px',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            transition: 'all 0.3s ease',
-            boxShadow: '0 2px 8px rgba(153, 27, 27, 0.1)'
+            gap: '8px'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = '#FEE2E2';
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(153, 27, 27, 0.2)';
+            e.currentTarget.style.borderColor = colors.terracotta;
+            e.currentTarget.style.background = `${colors.terracotta}05`;
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = '#FEF2F2';
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(153, 27, 27, 0.1)';
+            e.currentTarget.style.borderColor = colors.sand;
+            e.currentTarget.style.background = colors.warmWhite;
           }}
         >
           {/* SVG Trash Icon */}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M2 4h12M5.333 4V2.667a1.333 1.333 0 0 1 1.334-1.334h2.666a1.333 1.333 0 0 1 1.334 1.334V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M2 4h12M5.333 4V2.667a1.333 1.333 0 0 1 1.334-1.334h2.666a1.333 1.333 0 0 1 1.334 1.334V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           Delete
         </button>
       </Stack>
 
-      {/* Building Information Card */}
+      {/* Information Grid with Large Metrics */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: '24px',
+        marginBottom: '32px'
+      }}>
+        {/* Year Built Card */}
+        <div style={{
+          padding: '32px',
+          background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
+          border: `2px solid ${colors.sand}`,
+          borderRadius: '16px',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: -20,
+            right: -20,
+            width: '100px',
+            height: '100px',
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${colors.skyBlue}12, transparent)`
+          }} />
+
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{
+              fontSize: '13px',
+              fontWeight: '700',
+              color: colors.lightGray,
+              marginBottom: '12px',
+              letterSpacing: '1px',
+              textTransform: 'uppercase'
+            }}>
+              Year Built
+            </div>
+            <div style={{
+              fontSize: '48px',
+              fontWeight: '800',
+              color: colors.skyBlue,
+              lineHeight: '1',
+              marginBottom: '8px',
+              letterSpacing: '-2px'
+            }}>
+              {building.YearBuilt}
+            </div>
+            <div style={{
+              fontSize: '14px',
+              color: colors.warmGray,
+              fontWeight: '500'
+            }}>
+              {new Date().getFullYear() - building.YearBuilt} years of history
+            </div>
+          </div>
+        </div>
+
+        {/* Area Card */}
+        <div style={{
+          padding: '32px',
+          background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
+          border: `2px solid ${colors.sand}`,
+          borderRadius: '16px',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: -20,
+            right: -20,
+            width: '100px',
+            height: '100px',
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${colors.terracotta}12, transparent)`
+          }} />
+
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{
+              fontSize: '13px',
+              fontWeight: '700',
+              color: colors.lightGray,
+              marginBottom: '12px',
+              letterSpacing: '1px',
+              textTransform: 'uppercase'
+            }}>
+              Total Area
+            </div>
+            <div style={{
+              fontSize: '38px',
+              fontWeight: '800',
+              color: colors.terracotta,
+              lineHeight: '1',
+              marginBottom: '8px',
+              letterSpacing: '-1px'
+            }}>
+              {building.AreaSquareFootage.toLocaleString()}
+              <span style={{ fontSize: '20px', color: colors.warmGray, fontWeight: '600' }}> ft²</span>
+            </div>
+            <div style={{
+              fontSize: '14px',
+              color: colors.warmGray,
+              fontWeight: '500'
+            }}>
+              {(building.AreaSquareFootage * 0.092903).toFixed(0)} m² metric
+            </div>
+          </div>
+        </div>
+
+        {/* Commissioning Date - Full Width */}
+        {building.CommissioningDate && (
+          <div style={{
+            gridColumn: '1 / -1',
+            padding: '32px',
+            background: `linear-gradient(135deg, ${colors.sage}08, ${colors.sage}15)`,
+            border: `2px solid ${colors.sage}30`,
+            borderRadius: '16px'
+          }}>
+            <div style={{
+              fontSize: '13px',
+              fontWeight: '700',
+              color: colors.sage,
+              marginBottom: '12px',
+              letterSpacing: '1px',
+              textTransform: 'uppercase'
+            }}>
+              Commissioned
+            </div>
+            <div style={{
+              fontSize: '28px',
+              fontWeight: '700',
+              color: colors.charcoal,
+              letterSpacing: '-0.5px'
+            }}>
+              {Formatters.formatDate(building.CommissioningDate)}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Visual Separator */}
+      <div style={{
+        height: '1px',
+        background: `linear-gradient(90deg, transparent, ${colors.sand}, transparent)`,
+        margin: '40px 0 32px'
+      }} />
+
+      {/* Additional Details Card */}
       <div style={{
         background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
         padding: '32px',
         borderRadius: '16px',
-        boxShadow: '0 8px 24px rgba(45, 42, 38, 0.08)',
+        boxShadow: '0 4px 16px rgba(45, 42, 38, 0.06)',
         border: `1px solid ${colors.sand}`,
         position: 'relative'
       }}>
@@ -152,13 +348,13 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
         }}>
           {/* SVG Info Icon */}
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <circle cx="10" cy="10" r="8" stroke={colors.terracotta} strokeWidth="1.5"/>
-            <path d="M10 10v4M10 6h.01" stroke={colors.terracotta} strokeWidth="2" strokeLinecap="round"/>
+            <circle cx="10" cy="10" r="8" stroke={colors.terracotta} strokeWidth="1.5" />
+            <path d="M10 10v4M10 6h.01" stroke={colors.terracotta} strokeWidth="2" strokeLinecap="round" />
           </svg>
-          Building Information
+          Property Details
         </h3>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px 24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px' }}>
           {/* Property Name */}
           <div>
             <label style={{
@@ -175,14 +371,14 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
             <div style={{
               fontSize: '16px',
               color: colors.charcoal,
-              fontWeight: '500'
+              fontWeight: '600'
             }}>
               {building.PropertyName}
             </div>
           </div>
 
           {/* Address */}
-          <div>
+          <div style={{ gridColumn: 'span 2' }}>
             <label style={{
               display: 'block',
               fontSize: '11px',
@@ -203,62 +399,8 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
             </div>
           </div>
 
-          {/* Year Built */}
-          <div>
-            <label style={{
-              display: 'block',
-              fontSize: '11px',
-              fontWeight: '700',
-              color: colors.warmGray,
-              marginBottom: '6px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em'
-            }}>
-              Year Built
-            </label>
-            <div style={{
-              display: 'inline-block',
-              fontSize: '16px',
-              color: colors.charcoal,
-              fontWeight: '600',
-              background: `${colors.sand}60`,
-              padding: '6px 14px',
-              borderRadius: '8px',
-              border: `1px solid ${colors.sand}`
-            }}>
-              {building.YearBuilt}
-            </div>
-          </div>
-
-          {/* Area */}
-          <div>
-            <label style={{
-              display: 'block',
-              fontSize: '11px',
-              fontWeight: '700',
-              color: colors.warmGray,
-              marginBottom: '6px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em'
-            }}>
-              Area
-            </label>
-            <div style={{
-              display: 'inline-block',
-              fontSize: '16px',
-              color: colors.charcoal,
-              fontWeight: '600',
-              background: `${colors.skyBlue}15`,
-              padding: '6px 14px',
-              borderRadius: '8px',
-              border: `1px solid ${colors.skyBlue}40`
-            }}>
-              {Formatters.formatArea(building.AreaSquareFootage)}
-            </div>
-          </div>
-
-          {/* Commissioning Date */}
-          <div style={{ gridColumn: '1 / -1' }}>
+          {/* Commissioning Date Editor */}
+          <div style={{ gridColumn: '1 / -1', marginTop: '16px' }}>
             <label style={{
               display: 'block',
               fontSize: '11px',
@@ -268,7 +410,7 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
               textTransform: 'uppercase',
               letterSpacing: '0.05em'
             }}>
-              Commissioning Date
+              Update Commissioning Date
             </label>
             <div style={{ maxWidth: '300px' }}>
               <DatePicker
@@ -284,8 +426,8 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
                     selectors: {
                       '.ms-TextField-fieldGroup': {
                         borderRadius: '10px',
-                        border: `1px solid ${colors.sand}`,
-                        height: '42px',
+                        border: `2px solid ${colors.sand}`,
+                        height: '44px',
                         background: colors.warmWhite,
                         transition: 'all 0.2s ease'
                       },

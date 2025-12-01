@@ -30,33 +30,33 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
 
   // Base Card Styles
   const baseStyle: React.CSSProperties = {
-    padding: '20px',
+    padding: '20px 16px',
     cursor: 'pointer',
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-    marginBottom: '16px',
+    marginBottom: '12px',
     borderRadius: '12px',
     position: 'relative',
     fontFamily: '"Inter", -apple-system, system-ui, sans-serif'
   };
 
-  // Selected Style - Warm accent
+  // Selected Style - Warm accent (matching WarmModern exactly)
   const selectedStyle: React.CSSProperties = {
     ...baseStyle,
     background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
     border: `2px solid ${colors.terracotta}`,
-    boxShadow: `0 8px 24px rgba(212, 115, 90, 0.2), 0 2px 8px rgba(45, 42, 38, 0.08)`,
-    transform: 'translateY(-2px)'
+    boxShadow: '0 8px 24px rgba(212, 115, 90, 0.15), 0 0 0 1px rgba(212, 115, 90, 0.1)',
+    transform: 'none' // No transform for selected in WarmModern
   };
 
   // Normal Style
   const normalStyle: React.CSSProperties = {
     ...baseStyle,
     background: colors.warmWhite,
-    border: `1px solid ${colors.sand}`,
+    border: '2px solid transparent',
     boxShadow: isHovered
-      ? '0 8px 16px rgba(45, 42, 38, 0.08)'
+      ? '0 4px 16px rgba(45, 42, 38, 0.08)'
       : '0 2px 8px rgba(45, 42, 38, 0.04)',
-    transform: isHovered ? 'translateY(-2px)' : 'none'
+    transform: isHovered ? 'translateY(-2px)' : 'translateY(0)'
   };
 
   // Deleted Style
@@ -76,16 +76,17 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Decorative stripe for selected card */}
+      {/* Accent bar for selected - LEFT SIDE (WarmModern style) */}
       {isSelected && (
         <div style={{
           position: 'absolute',
-          top: 0,
           left: 0,
-          right: 0,
-          height: '4px',
-          background: `linear-gradient(90deg, ${colors.terracotta}, ${colors.sage}, ${colors.skyBlue})`,
-          borderRadius: '12px 12px 0 0'
+          top: '50%',
+          transform: 'translateY(-50%)',
+          width: '4px',
+          height: '60%',
+          background: `linear-gradient(180deg, ${colors.terracotta}, #C17B5A)`,
+          borderRadius: '0 4px 4px 0'
         }} />
       )}
 

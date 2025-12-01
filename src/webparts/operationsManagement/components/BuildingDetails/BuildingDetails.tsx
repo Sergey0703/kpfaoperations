@@ -37,10 +37,10 @@ export const BuildingDetails: React.FC = () => {
       }}>
         {/* SVG Building Icon */}
         <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style={{ opacity: 0.3 }}>
-          <rect x="20" y="24" width="40" height="40" rx="4" stroke={colors.charcoal} strokeWidth="2.5"/>
-          <path d="M20 32h40M28 24v40M40 24v40M52 24v40" stroke={colors.charcoal} strokeWidth="2.5"/>
-          <rect x="32" y="40" width="6" height="10" fill={colors.charcoal}/>
-          <rect x="42" y="40" width="6" height="10" fill={colors.charcoal}/>
+          <rect x="20" y="24" width="40" height="40" rx="4" stroke={colors.charcoal} strokeWidth="2.5" />
+          <path d="M20 32h40M28 24v40M40 24v40M52 24v40" stroke={colors.charcoal} strokeWidth="2.5" />
+          <rect x="32" y="40" width="6" height="10" fill={colors.charcoal} />
+          <rect x="42" y="40" width="6" height="10" fill={colors.charcoal} />
         </svg>
         <h2 style={{
           fontSize: '24px',
@@ -65,23 +65,12 @@ export const BuildingDetails: React.FC = () => {
       background: `linear-gradient(135deg, ${colors.cream} 0%, ${colors.sand}40 100%)`,
       fontFamily: '"Inter", -apple-system, system-ui, sans-serif'
     }}>
-      {/* Building Header with Decorative Stripe */}
+      {/* Building Header */}
       <div style={{
-        padding: '40px',
+        padding: '40px 40px 32px',
         background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
-        position: 'relative',
-        boxShadow: `0 4px 16px rgba(45, 42, 38, 0.06)`
+        position: 'relative'
       }}>
-        {/* Decorative color stripe */}
-        <div style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '4px',
-          background: `linear-gradient(90deg, ${colors.terracotta}, ${colors.sage}, ${colors.skyBlue})`
-        }} />
-
         {/* Decorative circular elements */}
         <div style={{
           position: 'absolute',
@@ -124,6 +113,33 @@ export const BuildingDetails: React.FC = () => {
         }}>
           {selectedBuilding.Address}
         </p>
+
+        {/* Decorative line accent */}
+        <div style={{
+          marginTop: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px'
+        }}>
+          <div style={{
+            width: '80px',
+            height: '4px',
+            background: `linear-gradient(90deg, ${colors.terracotta}, #C17B5A)`,
+            borderRadius: '2px'
+          }} />
+          <div style={{
+            width: '40px',
+            height: '4px',
+            background: colors.skyBlue,
+            borderRadius: '2px'
+          }} />
+          <div style={{
+            width: '20px',
+            height: '4px',
+            background: colors.sage,
+            borderRadius: '2px'
+          }} />
+        </div>
       </div>
 
       {/* Tabs */}
