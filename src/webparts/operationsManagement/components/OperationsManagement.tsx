@@ -5,7 +5,10 @@ import { DataProvider } from './Context';
 import { BuildingsGallery } from './BuildingsGallery';
 import { BuildingDetails } from './BuildingDetails';
 import { DialogContainer } from './Dialogs';
-import { ColorSchemePreview } from './ColorSchemePreview';
+import { NeonFuture } from './StylePreviews/NeonFuture';
+import { DublinHeritage } from './StylePreviews/DublinHeritage';
+import { WarmModern } from './StylePreviews/WarmModern';
+import { VehiclesWarmModern } from './StylePreviews/VehiclesWarmModern';
 import styles from './OperationsManagement.module.scss';
 
 interface IOperationsManagementState {
@@ -96,10 +99,10 @@ export default class OperationsManagement extends React.Component<IOperationsMan
             }}
           >
             <PivotItem headerText="Buildings" itemKey="buildings" itemIcon="CityNext" />
-            <PivotItem headerText="Vehicles" itemKey="vehicles" itemIcon="Car" />
-            <PivotItem headerText="Reports" itemKey="reports" itemIcon="BarChartVertical" />
-            <PivotItem headerText="Settings" itemKey="settings" itemIcon="Settings" />
-            <PivotItem headerText="Design Preview" itemKey="design" itemIcon="Color" />
+            <PivotItem headerText="Warm Modern" itemKey="warm" itemIcon="Sunny" />
+            <PivotItem headerText="Dublin Heritage" itemKey="heritage" itemIcon="Home" />
+            <PivotItem headerText="Vehicles" itemKey="vehicles" itemIcon="car" />
+            <PivotItem headerText="Neon" itemKey="neon" itemIcon="Rocket" />
           </Pivot>
 
           {/* Content based on active tab */}
@@ -116,29 +119,26 @@ export default class OperationsManagement extends React.Component<IOperationsMan
             )}
 
             {activeTab === 'vehicles' && (
-              <div className={styles.comingSoon}>
-                <h2>Vehicles</h2>
-                <p>Coming soon...</p>
-              </div>
-            )}
-
-            {activeTab === 'reports' && (
-              <div className={styles.comingSoon}>
-                <h2>Reports</h2>
-                <p>Coming soon...</p>
-              </div>
-            )}
-
-            {activeTab === 'settings' && (
-              <div className={styles.comingSoon}>
-                <h2>Settings</h2>
-                <p>Coming soon...</p>
-              </div>
-            )}
-
-            {activeTab === 'design' && (
               <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
-                <ColorSchemePreview />
+                <VehiclesWarmModern />
+              </div>
+            )}
+
+            {activeTab === 'warm' && (
+              <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
+                <WarmModern />
+              </div>
+            )}
+
+            {activeTab === 'heritage' && (
+              <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
+                <DublinHeritage />
+              </div>
+            )}
+
+            {activeTab === 'neon' && (
+              <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
+                <NeonFuture />
               </div>
             )}
           </Stack>
