@@ -169,14 +169,14 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
               marginBottom: '8px',
               textTransform: 'uppercase'
             }}>
-              Дата начала эксплуатации
+              Commissioning Date
             </label>
             <DatePicker
               value={building.CommissioningDate ? new Date(building.CommissioningDate) : undefined}
               onSelectDate={handleCommissioningDateChange}
               firstDayOfWeek={DayOfWeek.Monday}
-              placeholder="Выберите дату"
-              ariaLabel="Выберите дату начала эксплуатации"
+              placeholder="Select date"
+              ariaLabel="Select commissioning date"
               formatDate={(date) => date ? Formatters.formatDate(date) : ''}
               styles={{
                 root: { maxWidth: '300px' },

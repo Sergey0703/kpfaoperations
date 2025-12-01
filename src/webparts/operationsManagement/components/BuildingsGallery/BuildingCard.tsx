@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { IBuilding } from '../../models/IBuilding';
 import { ColorScheme } from '../../styles/ColorScheme';
+import { Formatters } from '../../utils/Formatters';
 
 export interface IBuildingCardProps {
   building: IBuilding;
@@ -113,12 +114,18 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
       {/* Metadata */}
       <div style={{
         display: 'flex',
-        gap: '12px',
+        flexDirection: 'column',
+        gap: '4px',
         fontSize: '12px',
         color: '#9CA3AF'
       }}>
-        <span>Built {building.YearBuilt}</span>
-        <span>{building.AreaSquareFootage.toLocaleString('en-US', { maximumFractionDigits: 0 })} sq ft</span>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <span>Built {building.YearBuilt}</span>
+          <span>{building.AreaSquareFootage.toLocaleString('en-US', { maximumFractionDigits: 0 })} sq ft</span>
+        </div>
+        {building.CommissioningDate && (
+          <span>Commissioned {Formatters.formatDate(building.CommissioningDate)}</span>
+        )}
       </div>
     </div>
   );
