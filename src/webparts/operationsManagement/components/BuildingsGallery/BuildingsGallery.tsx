@@ -49,37 +49,46 @@ export const BuildingsGallery: React.FC = () => {
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
-      backgroundColor: '#faf9f8',
-      borderRight: '1px solid #edebe9'
+      backgroundColor: '#F3F4F6', // Softer gray background
+      borderRight: '1px solid #E5E7EB',
+      position: 'relative'
     }}>
-      {/* Header */}
+      {/* Header - Sticky & Glassmorphic */}
       <div style={{
-        padding: '16px',
-        backgroundColor: '#ffffff',
-        borderBottom: '1px solid #edebe9'
+        padding: '20px',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        backdropFilter: 'blur(8px)',
+        borderBottom: '1px solid rgba(229, 231, 235, 0.5)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 10
       }}>
-        <h2 style={{
-          margin: '0 0 12px 0',
-          fontSize: '20px',
-          fontWeight: '600',
-          color: '#323130'
-        }}>
-          Buildings
-        </h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <h2 style={{
+            margin: 0,
+            fontSize: '24px',
+            fontWeight: '700',
+            color: '#111827',
+            letterSpacing: '-0.02em'
+          }}>
+            Buildings
+          </h2>
+        </div>
+
         <button
           onClick={actions.openAddDialog}
           style={{
             width: '100%',
-            padding: '12px 16px',
-            background: '#4285F4',
+            padding: '12px 20px',
+            background: 'linear-gradient(135deg, #4285F4 0%, #34A853 100%)', // Google Gradient
             color: '#ffffff',
             border: 'none',
-            borderRadius: '6px',
-            fontSize: '14px',
+            borderRadius: '12px',
+            fontSize: '15px',
             fontWeight: '600',
             cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(66, 133, 244, 0.3)',
-            transition: 'all 0.2s ease',
+            boxShadow: '0 4px 12px rgba(66, 133, 244, 0.3)',
+            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -87,31 +96,35 @@ export const BuildingsGallery: React.FC = () => {
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-1px)';
-            e.currentTarget.style.background = '#3367D6';
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(66, 133, 244, 0.4)';
+            e.currentTarget.style.boxShadow = '0 6px 16px rgba(66, 133, 244, 0.4)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.background = '#4285F4';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(66, 133, 244, 0.3)';
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(66, 133, 244, 0.3)';
           }}
         >
-          <span style={{ fontSize: '16px', fontWeight: 'bold' }}>+</span>
+          <span style={{ fontSize: '18px', fontWeight: 'bold' }}>+</span>
           Add Building
         </button>
       </div>
 
       {/* Search Section */}
       <div style={{
-        padding: '12px 16px',
+        padding: '16px 20px',
         backgroundColor: '#ffffff',
-        borderBottom: '1px solid #edebe9'
+        borderBottom: '1px solid #E5E7EB'
       }}>
         <SearchBox
           placeholder="Search buildings..."
           onChange={(_ev, value) => handleSearch(value)}
           styles={{
-            root: { marginBottom: '12px' }
+            root: {
+              marginBottom: '12px',
+              borderRadius: '8px',
+              border: '1px solid #E5E7EB',
+              height: '40px'
+            },
+            iconContainer: { color: '#6B7280' }
           }}
         />
         <Toggle
@@ -119,14 +132,15 @@ export const BuildingsGallery: React.FC = () => {
           checked={state.showDeleted}
           onChange={handleShowDeletedChange}
           styles={{
-            root: { margin: 0 }
+            root: { margin: 0 },
+            label: { fontWeight: '500', color: '#4B5563' }
           }}
         />
       </div>
 
       {/* Error Message */}
       {state.error && (
-        <div style={{ margin: '12px 16px' }}>
+        <div style={{ margin: '16px 20px' }}>
           <MessageBar
             messageBarType={MessageBarType.error}
             onDismiss={actions.clearError}
@@ -143,7 +157,8 @@ export const BuildingsGallery: React.FC = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '40px 16px'
+          padding: '40px 20px',
+          flex: 1
         }}>
           <Spinner size={SpinnerSize.large} label={AppConstants.MSG_LOADING} />
         </div>
@@ -152,12 +167,21 @@ export const BuildingsGallery: React.FC = () => {
       {/* Empty State */}
       {!state.isLoading && state.filteredBuildings.length === 0 && (
         <div style={{
-          padding: '40px 16px',
+          padding: '60px 20px',
           textAlign: 'center',
-          color: '#605e5c',
-          fontSize: '14px'
+          color: '#6B7280',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '12px'
         }}>
-          <p style={{ margin: 0 }}>{AppConstants.MSG_NO_BUILDINGS}</p>
+          <div style={{
+            fontSize: '48px',
+            marginBottom: '8px',
+            opacity: 0.5
+          }}>🏢</div>
+          <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600', color: '#374151' }}>No buildings found</h3>
+          <p style={{ margin: 0, fontSize: '14px' }}>{AppConstants.MSG_NO_BUILDINGS}</p>
         </div>
       )}
 
@@ -166,7 +190,7 @@ export const BuildingsGallery: React.FC = () => {
         <div style={{
           flex: 1,
           overflowY: 'auto',
-          padding: '12px 16px'
+          padding: '16px 20px'
         }}>
           {state.filteredBuildings.map((building) => (
             <BuildingCard

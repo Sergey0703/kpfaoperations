@@ -19,16 +19,20 @@ export const BuildingDetails: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
-        color: '#605e5c'
+        color: '#6B7280',
+        backgroundColor: '#F9FAFB',
+        gap: '16px'
       }}>
+        <div style={{ fontSize: '64px', opacity: 0.2 }}>🏢</div>
         <h2 style={{
           fontSize: '24px',
           fontWeight: '600',
-          margin: '0 0 8px 0'
+          margin: 0,
+          color: '#374151'
         }}>
           Select a building
         </h2>
-        <p style={{ fontSize: '14px', margin: 0 }}>
+        <p style={{ fontSize: '15px', margin: 0 }}>
           Choose a building from the list to view details
         </p>
       </div>
@@ -40,14 +44,15 @@ export const BuildingDetails: React.FC = () => {
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
-      backgroundColor: '#ffffff'
+      backgroundColor: '#F9FAFB' // Light gray background for the whole panel
     }}>
       {/* Building Header with Rainbow Underline */}
       <div style={{
-        padding: '20px 24px',
+        padding: '32px 40px',
         background: '#ffffff',
         position: 'relative',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+        zIndex: 5
       }}>
         {/* Rainbow underline */}
         <div style={{
@@ -55,20 +60,24 @@ export const BuildingDetails: React.FC = () => {
           bottom: 0,
           left: 0,
           right: 0,
-          height: '2px',
+          height: '3px',
           background: ColorScheme.primaryGradientBorder
         }} />
+
         <h2 style={{
-          margin: '0 0 4px 0',
-          fontSize: '24px',
-          fontWeight: '600',
-          color: '#111827'
+          margin: '0 0 8px 0',
+          fontSize: '32px',
+          fontWeight: '800',
+          color: '#111827',
+          letterSpacing: '-0.02em'
         }}>
           {selectedBuilding.PropertyName}
         </h2>
+
         <p style={{
-          margin: 0,
-          fontSize: '14px',
+          margin: '4px 0 0 0',
+          fontSize: '16px',
+          fontWeight: '500',
           color: '#6B7280'
         }}>
           {selectedBuilding.Address}
@@ -76,29 +85,34 @@ export const BuildingDetails: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <Pivot
-        selectedKey={activeTab}
-        onLinkClick={(item) => {
-          if (item && item.props.itemKey) {
-            actions.setActiveTab(item.props.itemKey as 'details' | 'documents');
-          }
-        }}
-        styles={{
-          root: {
-            borderBottom: '1px solid #edebe9',
-            paddingLeft: '24px'
-          }
-        }}
-      >
-        <PivotItem headerText="Details" itemKey="details" itemIcon="Info" />
-        <PivotItem headerText="Documents" itemKey="documents" itemIcon="Documentation" />
-      </Pivot>
+      <div style={{
+        backgroundColor: '#ffffff',
+        paddingLeft: '24px',
+        borderBottom: '1px solid #E5E7EB'
+      }}>
+        <Pivot
+          selectedKey={activeTab}
+          onLinkClick={(item) => {
+            if (item && item.props.itemKey) {
+              actions.setActiveTab(item.props.itemKey as 'details' | 'documents');
+            }
+          }}
+          styles={{
+            root: { height: '48px' },
+            link: { height: '48px', fontSize: '14px', fontWeight: '600' },
+            linkIsSelected: { height: '48px', fontSize: '14px', fontWeight: '700' }
+          }}
+        >
+          <PivotItem headerText="Details" itemKey="details" itemIcon="Info" />
+          <PivotItem headerText="Documents" itemKey="documents" itemIcon="Documentation" />
+        </Pivot>
+      </div>
 
       {/* Tab Content */}
       <div style={{
         flex: 1,
         overflow: 'auto',
-        padding: '24px'
+        padding: '32px 40px'
       }}>
         {activeTab === 'details' && <DetailsTab building={selectedBuilding} />}
         {activeTab === 'documents' && <DocumentsTab building={selectedBuilding} />}

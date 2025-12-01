@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { IBuilding } from '../../models/IBuilding';
 import { ColorScheme } from '../../styles/ColorScheme';
-import { Formatters } from '../../utils/Formatters';
 
 export interface IBuildingCardProps {
   building: IBuilding;
@@ -18,42 +17,44 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
     onClick(building);
   };
 
-  // Базовые стили
+  // Modern Card Styles
   const baseStyle: React.CSSProperties = {
-    padding: '16px',
+    padding: '20px',
     cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    marginBottom: '12px',
-    borderRadius: ColorScheme.borderRadius
+    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+    marginBottom: '16px',
+    borderRadius: '16px',
+    position: 'relative',
+    background: '#ffffff',
+    border: '1px solid transparent' // Placeholder for border transitions
   };
 
-  // Стили для выбранной карточки с градиентной рамкой
+  // Selected Style - Gradient Border & Glow
   const selectedStyle: React.CSSProperties = {
     ...baseStyle,
-    backgroundColor: '#ffffff',
-    border: '1px solid transparent',
     background: `
-      linear-gradient(white, white) padding-box,
+      linear-gradient(#ffffff, #ffffff) padding-box,
       ${ColorScheme.primaryGradientBorder} border-box
     `,
-    boxShadow: isHovered ? ColorScheme.cardShadowHover : ColorScheme.cardShadow,
-    transform: isHovered ? 'translateY(-2px)' : 'none'
+    boxShadow: '0 12px 24px -8px rgba(66, 133, 244, 0.15), 0 4px 8px -4px rgba(66, 133, 244, 0.1)',
+    transform: 'translateY(-2px)'
   };
 
-  // Стили для обычной карточки
+  // Normal Style - Clean & Soft
   const normalStyle: React.CSSProperties = {
     ...baseStyle,
-    backgroundColor: '#ffffff',
-    border: '1px solid #edebe9',
-    boxShadow: isHovered ? '0 4px 12px rgba(0, 0, 0, 0.1)' : '0 2px 4px rgba(0, 0, 0, 0.05)',
+    border: '1px solid rgba(229, 231, 235, 0.5)', // Very subtle border
+    boxShadow: isHovered
+      ? '0 12px 20px -8px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04)' // Elevated on hover
+      : '0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02)', // Flat when idle
     transform: isHovered ? 'translateY(-2px)' : 'none'
   };
 
-  // Стили для удаленной карточки
+  // Deleted Style
   const deletedStyle: React.CSSProperties = {
-    opacity: 0.6,
-    fontStyle: 'italic',
-    color: '#605e5c'
+    opacity: 0.7,
+    background: '#F9FAFB',
+    border: '1px dashed #D1D5DB'
   };
 
   const cardStyle = isSelected ? selectedStyle : normalStyle;
@@ -67,29 +68,28 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
         <h3 style={{
           margin: 0,
           fontSize: '16px',
-          fontWeight: '600',
+          fontWeight: '700',
           color: '#111827',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
+          lineHeight: '1.4',
+          letterSpacing: '-0.01em',
           flex: 1
         }}>
           {building.PropertyName}
         </h3>
         {building.Deleted && (
           <span style={{
-            background: ColorScheme.badges.overdue.accent,
-            color: '#ffffff',
-            fontSize: '10px',
-            padding: '4px 8px',
-            borderRadius: '8px',
-            textTransform: 'uppercase',
+            background: '#FEF2F2',
+            color: '#991B1B',
+            fontSize: '11px',
+            padding: '2px 8px',
+            borderRadius: '9999px',
             fontWeight: '600',
-            marginLeft: '8px'
+            marginLeft: '8px',
+            border: '1px solid #FECACA'
           }}>
             Deleted
           </span>
@@ -97,35 +97,45 @@ export const BuildingCard: React.FC<IBuildingCardProps> = ({ building, isSelecte
       </div>
 
       {/* Address */}
-      <p style={{
-        margin: '0 0 8px 0',
-        fontSize: '13px',
-        color: '#6B7280',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        display: '-webkit-box',
-        WebkitLineClamp: 2,
-        WebkitBoxOrient: 'vertical',
-        lineHeight: '1.4'
-      }}>
-        {building.Address}
-      </p>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
+        <p style={{
+          margin: 0,
+          fontSize: '13px',
+          color: '#6B7280',
+          lineHeight: '1.5',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden'
+        }}>
+          {building.Address}
+        </p>
+      </div>
 
-      {/* Metadata */}
+      {/* Metadata Badges */}
       <div style={{
         display: 'flex',
-        flexDirection: 'column',
-        gap: '4px',
+        flexWrap: 'wrap',
+        gap: '8px',
         fontSize: '12px',
-        color: '#9CA3AF'
+        color: '#4B5563'
       }}>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <span>Built {building.YearBuilt}</span>
-          <span>{building.AreaSquareFootage.toLocaleString('en-US', { maximumFractionDigits: 0 })} sq ft</span>
-        </div>
-        {building.CommissioningDate && (
-          <span>Commissioned {Formatters.formatDate(building.CommissioningDate)}</span>
-        )}
+        <span style={{
+          background: '#F3F4F6',
+          padding: '4px 8px',
+          borderRadius: '6px',
+          fontWeight: '500'
+        }}>
+          {building.YearBuilt}
+        </span>
+        <span style={{
+          background: '#F3F4F6',
+          padding: '4px 8px',
+          borderRadius: '6px',
+          fontWeight: '500'
+        }}>
+          {building.AreaSquareFootage.toLocaleString('en-US', { maximumFractionDigits: 0 })} sq ft
+        </span>
       </div>
     </div>
   );
