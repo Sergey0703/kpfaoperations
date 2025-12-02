@@ -133,7 +133,8 @@ export const BuildingsGallery: React.FC = () => {
       <div style={{
         padding: '16px',
         background: colors.warmWhite,
-        borderBottom: `1px solid ${colors.sand}`
+        borderBottom: `1px solid ${colors.sand}`,
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
       }}>
         {/* Search + Button in one row */}
         <div style={{

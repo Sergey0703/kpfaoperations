@@ -53,7 +53,7 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
           onClick={handleEdit}
           style={{
             padding: '16px 32px',
-            background: `linear-gradient(135deg, #4A7C8F, ${colors.skyBlue})`,
+            background: colors.skyBlue,
             color: 'white',
             border: 'none',
             borderRadius: '10px',
@@ -65,13 +65,16 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
             letterSpacing: '0.2px',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px'
+            gap: '8px',
+            height: '44px'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.opacity = '0.9';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.opacity = '1';
           }}
         >
           {/* SVG Edit Icon */}
@@ -96,7 +99,8 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
             letterSpacing: '0.2px',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px'
+            gap: '8px',
+            height: '44px'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = colors.terracotta;
