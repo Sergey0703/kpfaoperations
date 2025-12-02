@@ -173,11 +173,11 @@ export const BuildingDetails: React.FC = () => {
               height: '48px',
               fontSize: '14px',
               fontWeight: '700',
-              color: colors.terracotta,
+              color: colors.skyBlue,
               selectors: {
                 '::before': {
                   height: '3px',
-                  backgroundColor: colors.terracotta
+                  backgroundColor: colors.skyBlue
                 }
               }
             }
