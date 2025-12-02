@@ -204,9 +204,19 @@ export const BuildingsGallery: React.FC = () => {
           label="Show deleted"
           checked={state.showDeleted}
           onChange={handleShowDeletedChange}
+          inlineLabel
           styles={{
-            root: { margin: 0 },
-            label: { fontWeight: '500', color: colors.charcoal, fontSize: '13px' }
+            root: {
+              margin: 0,
+              display: 'flex',
+              alignItems: 'center'
+            },
+            label: {
+              fontWeight: '500',
+              color: colors.charcoal,
+              fontSize: '13px',
+              marginLeft: '8px'
+            }
           }}
         />
       </div>
