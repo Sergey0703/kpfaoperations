@@ -47,58 +47,6 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
 
   return (
     <div style={{ fontFamily: '"Inter", -apple-system, system-ui, sans-serif' }}>
-      {/* Status Section */}
-      <div style={{
-        padding: '32px 0 24px',
-        background: `linear-gradient(135deg, ${colors.warmWhite} 0%, ${colors.cream} 100%)`,
-        marginBottom: '32px',
-        borderRadius: '16px',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        {/* Decorative circles */}
-        <div style={{
-          position: 'absolute',
-          top: -40,
-          right: -40,
-          width: '160px',
-          height: '160px',
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${colors.terracotta}08, transparent)`,
-          pointerEvents: 'none'
-        }} />
-
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          {/* Status pill */}
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '8px 20px',
-            background: colors.warmWhite,
-            border: `2px solid ${colors.sage}30`,
-            borderRadius: '24px',
-            marginBottom: '20px',
-            boxShadow: '0 2px 8px rgba(139, 157, 131, 0.1)'
-          }}>
-            <div style={{
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
-              background: colors.sage
-            }} />
-            <span style={{
-              fontSize: '13px',
-              fontWeight: '600',
-              color: colors.sage,
-              letterSpacing: '0.5px'
-            }}>
-              Active Property
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Action Buttons */}
       <Stack horizontal tokens={{ childrenGap: 12 }} style={{ marginBottom: '32px' }}>
         <button
