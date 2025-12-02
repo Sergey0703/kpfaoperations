@@ -156,28 +156,45 @@ export const BuildingDetails: React.FC = () => {
             }
           }}
           styles={{
-            root: { height: '48px' },
-            link: {
+            root: {
               height: '48px',
+              display: 'flex',
+              alignItems: 'center'
+            },
+            link: {
+              height: '36px',
               fontSize: '14px',
               fontWeight: '600',
               color: colors.warmGray,
+              padding: '8px 16px',
+              margin: '0 4px',
+              borderRadius: '6px',
+              transition: 'all 0.2s ease',
               selectors: {
                 ':hover': {
                   color: colors.charcoal,
                   backgroundColor: `${colors.sand}40`
+                },
+                '::before': {
+                  display: 'none'
                 }
               }
             },
             linkIsSelected: {
-              height: '48px',
+              height: '36px',
               fontSize: '14px',
               fontWeight: '700',
               color: colors.skyBlue,
+              backgroundColor: `${colors.skyBlue}15`,
+              padding: '8px 16px',
+              margin: '0 4px',
+              borderRadius: '6px',
               selectors: {
                 '::before': {
-                  height: '3px',
-                  backgroundColor: colors.skyBlue
+                  display: 'none'
+                },
+                ':hover': {
+                  backgroundColor: `${colors.skyBlue}20`
                 }
               }
             }
