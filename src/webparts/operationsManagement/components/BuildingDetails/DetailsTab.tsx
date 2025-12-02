@@ -52,7 +52,7 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
         <button
           onClick={handleEdit}
           style={{
-            padding: '14px 28px',
+            padding: '16px 32px',
             background: `linear-gradient(135deg, #4A7C8F, ${colors.skyBlue})`,
             color: 'white',
             border: 'none',
@@ -61,7 +61,7 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
             fontWeight: '600',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
-            boxShadow: '0 4px 16px rgba(74, 124, 143, 0.25)',
+            boxShadow: 'none',
             letterSpacing: '0.2px',
             display: 'flex',
             alignItems: 'center',
@@ -69,11 +69,9 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 6px 20px rgba(74, 124, 143, 0.35)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 16px rgba(74, 124, 143, 0.25)';
           }}
         >
           {/* SVG Edit Icon */}
@@ -86,10 +84,10 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
         <button
           onClick={handleDelete}
           style={{
-            padding: '14px 28px',
-            background: colors.warmWhite,
+            padding: '16px 32px',
+            background: 'transparent',
             color: colors.terracotta,
-            border: `2px solid ${colors.sand}`,
+            border: '1px solid #E0E0E0',
             borderRadius: '10px',
             fontSize: '15px',
             fontWeight: '600',
@@ -102,11 +100,11 @@ export const DetailsTab: React.FC<IDetailsTabProps> = ({ building }) => {
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = colors.terracotta;
-            e.currentTarget.style.background = `${colors.terracotta}05`;
+            e.currentTarget.style.background = `${colors.terracotta}08`;
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = colors.sand;
-            e.currentTarget.style.background = colors.warmWhite;
+            e.currentTarget.style.borderColor = '#E0E0E0';
+            e.currentTarget.style.background = 'transparent';
           }}
         >
           {/* SVG Trash Icon */}
